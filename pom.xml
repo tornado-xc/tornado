@@ -11,6 +11,13 @@
     <modules>
         <module>tornado-common</module>
         <module>tornado-core</module>
+        <module>tornado-dict</module>
+        <module>tornado-unique</module>
+        <module>tornado-register</module>
+        <module>tornado-shortlink</module>
+        <module>tornado-sms</module>
+        <module>tornado-file</module>
+        <module>tornado-captcha</module>
     </modules>
 
     <properties>
