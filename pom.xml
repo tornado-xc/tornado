@@ -18,6 +18,7 @@
         <module>tornado-sms</module>
         <module>tornado-file</module>
         <module>tornado-captcha</module>
+        <module>tornado-workflow</module>
     </modules>
 
     <properties>
