@@ -1,3 +1,23 @@
 server:
-  port: 58080
-
+  port: ${SERVER.PORT:53000}
+spring:
+  application:
+    name: ${SPRING.APPLICATION.NAME:unique-server}
+  redis:
+    host: ${REDIS.HOST:150.158.130.171}
+    port: ${REDIS.PORT:56379}
+    password: ${REDIS.PASSWORD:xy19981123..}
+  cloud:
+    nacos:
+      discovery:
+        group: DEV_GROUP
+        server-addr: localhost:58848
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:58090/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}

@@ -1,14 +1,14 @@
-package com.xingchi.tornado.unique.factory;
+package com.xingchi.unique.provider.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.xingchi.common.unique.IDProviderType;
+import com.xingchi.unique.provider.IDProvider;
 
 /**
  * @author xingchi
  * @date 2023/5/3 11:41
  * @modified xingchi
  */
-public class SnowflakeGenerator implements IDGGenerator<Long> {
+public class SnowflakeProvider implements IDProvider<Long> {
 
     private final long twepoch = 1661846673178L;
     private final long workerIdBits = 5L;
@@ -27,7 +27,7 @@ public class SnowflakeGenerator implements IDGGenerator<Long> {
     private long lastTimestamp = -1L;
 
 
-    public SnowflakeGenerator(long workerId, long datacenterId) {
+    public SnowflakeProvider(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
@@ -58,12 +58,9 @@ public class SnowflakeGenerator implements IDGGenerator<Long> {
         return ((timestamp - twepoch) << timestampLeftShift) | (datacenterId << datacenterIdShift) | (workerId << workerIdShift) | sequence;
     }
 
-    public List<Long> nextIds(int count) {
-        List<Long> result = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            result.add(this.nextId());
-        }
-        return result;
+    @Override
+    public boolean supports(IDProviderType type) {
+        return IDProviderType.SNOWFLAKE.equals(type);
     }
 
     protected long tilNextMillis(long lastTimestamp) {
