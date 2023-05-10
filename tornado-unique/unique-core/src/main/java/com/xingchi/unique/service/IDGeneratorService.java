@@ -1,7 +1,7 @@
 package com.xingchi.unique.service;
 
 
-import com.xingchi.common.unique.IDProviderType;
+import com.xingchi.unique.common.IDProviderType;
 
 import java.util.List;
 

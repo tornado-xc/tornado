@@ -1,6 +1,6 @@
 package com.xingchi.unique.controller;
 
-import com.xingchi.common.unique.IDProviderType;
+import com.xingchi.unique.common.IDProviderType;
 import com.xingchi.tornado.basic.Result;
 import com.xingchi.unique.service.IDGeneratorService;
 import org.springframework.web.bind.annotation.GetMapping;

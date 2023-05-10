@@ -1,7 +1,7 @@
 package com.xingchi.unique.service.impl;
 
 
-import com.xingchi.common.unique.IDProviderType;
+import com.xingchi.unique.common.IDProviderType;
 import com.xingchi.tornado.constant.Constants;
 import com.xingchi.unique.provider.IDProvider;
 import com.xingchi.unique.provider.impl.RedisProvider;

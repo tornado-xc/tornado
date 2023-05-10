@@ -1,6 +1,6 @@
 package com.xingchi.unique.provider;
 
-import com.xingchi.common.unique.IDProviderType;
+import com.xingchi.unique.common.IDProviderType;
 
 import java.util.ArrayList;
 import java.util.List;

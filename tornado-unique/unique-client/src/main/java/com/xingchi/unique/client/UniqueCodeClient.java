@@ -1,6 +1,7 @@
 package com.xingchi.unique.client;
 
 import com.xingchi.unique.client.feign.UniqueCodeFeignClient;
+import com.xingchi.unique.common.IDProviderType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UniqueCodeClient {
     /**
      * 获取单个id
      *
-     * @param type              id生成类型 {@link com.xingchi.common.unique.IDProviderType}
+     * @param type              id生成类型 {@link IDProviderType}
      * @return                  id
      */
     public String uniqueId(String type) {
@@ -34,7 +35,7 @@ public class UniqueCodeClient {
     /**
      * 获取多个id
      *
-     * @param type              id生成类型 {@link com.xingchi.common.unique.IDProviderType}
+     * @param type              id生成类型 {@link IDProviderType}
      * @param count             生成个数
      * @return                  多个id
      */

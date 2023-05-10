@@ -1,6 +1,6 @@
 package com.xingchi.unique.provider.impl;
 
-import com.xingchi.common.unique.IDProviderType;
+import com.xingchi.unique.common.IDProviderType;
 import com.xingchi.unique.provider.IDProvider;
 
 /**

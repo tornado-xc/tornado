@@ -1,4 +1,4 @@
-package com.xingchi.common.unique;
+package com.xingchi.unique.common;
 
 import java.util.Arrays;
 
@@ -11,6 +11,9 @@ import java.util.Arrays;
  */
 public enum IDProviderType {
 
+    /**
+     * id提供者类型
+     */
     SNOWFLAKE,
     REDIS,
     UUID,
