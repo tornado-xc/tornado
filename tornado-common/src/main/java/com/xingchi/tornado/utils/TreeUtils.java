@@ -1,15 +1,13 @@
 package com.xingchi.tornado.utils;
 
 import com.xingchi.tornado.tree.TreeNode;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -48,17 +46,33 @@ public class TreeUtils {
             return Collections.emptyList();
         }
 
-        Map<? extends Serializable, List<M>> parentNodeMappings = nodes.stream().collect(Collectors.groupingBy(TreeNode::getParentId));
-
-        for (M node : nodes) {
-            Serializable id = node.getId();
-            if (parentNodeMappings.containsKey(id)) {
-                node.setChildren(parentNodeMappings.get(id));
+        // 记录自己是自己的父节点的id集合
+        List<Serializable> selfIdEqSelfParent = new ArrayList<>();
+        // 为每一个节点找到子节点集合
+        for (M parent : nodes) {
+            Serializable id = parent.getId();
+            for (M children : nodes) {
+                if (parent != children) {
+                    // parent != children 这个来判断自己的孩子不允许是自己，因为有时候，根节点的parent会被设置成为自己
+                    if (id.equals(children.getParentId())) {
+                        parent.initChildren();
+                        parent.getChildren().add(children);
+                    }
+                } else if (id.equals(parent.getParentId())) {
+                    selfIdEqSelfParent.add(id);
+                }
             }
         }
 
-
-        return null;
+        // 找出根节点集合
+        List<M> trees = new ArrayList<>();
+        Set<Serializable> allIds = nodes.stream().map(TreeNode::getId).collect(Collectors.toSet());
+        for (M baseNode : nodes) {
+            if (!allIds.contains(baseNode.getParentId()) || selfIdEqSelfParent.contains(baseNode.getParentId())) {
+                trees.add(baseNode);
+            }
+        }
+        return trees;
     }
 
 }
