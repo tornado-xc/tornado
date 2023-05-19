@@ -34,7 +34,7 @@ public class TreeUtils {
     }
 
     /**
-     * 构建树形结构
+     * 将List构建为树形结构，时间复杂度O(n^2)
      *
      * @param nodes 节点信息，平铺的
      * @param <M>   模型类型
