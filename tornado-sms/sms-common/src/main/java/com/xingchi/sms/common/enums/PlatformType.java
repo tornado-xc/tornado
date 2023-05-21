@@ -16,8 +16,8 @@ public enum PlatformType implements BaseEnum {
 
     ALIYUN(1, "阿里云"),
     TENCENT(2, "腾讯云"),
-    OTHER(4, "其他"),
-    DEFAULT(5, "默认平台-默认不发送"),
+    OTHER(10, "其他"),
+    DEFAULT(11, "默认平台-默认不发送"),
 
     ;
 

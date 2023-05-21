@@ -1,4 +1,4 @@
-package com.xingchi.sms.common.model;
+package com.xingchi.sms.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -24,7 +24,7 @@ public class NoteTemplate {
     /**
      * id
      */
-    @TableId(type = IdType.NONE)
+    @TableId(type = IdType.INPUT)
     @TableField(fill = FieldFill.INSERT)
     private Long id;
 
@@ -72,11 +72,18 @@ public class NoteTemplate {
      * 删除标记
      */
     @TableLogic
+    @TableField(select = false)
     private Integer deleted;
 
     /**
      * 签名
      */
     private String signName;
+
+    /**
+     * 描述信息 (查询时忽略该字段，该字段过于长，印象查询效率)
+     */
+    @TableField(select = false)
+    private String description;
 
 }

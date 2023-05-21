@@ -1,6 +1,6 @@
 package com.xingchi.sms.service.impl;
 
-import com.xingchi.sms.common.model.NoteTemplate;
+import com.xingchi.sms.model.NoteTemplate;
 import com.xingchi.sms.service.NoteService;
 import com.xingchi.tornado.basic.BaseParameter;
 import com.xingchi.tornado.core.exception.ExceptionWrap;
