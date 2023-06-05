@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.xingchi"})
+@ComponentScan(basePackages = {"com.xingchi.tornado", "com.xingchi.sms"})
 @EnableFeignClients("com.xingchi")
 public class SmsApplication {
 

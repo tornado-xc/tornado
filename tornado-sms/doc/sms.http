@@ -1,0 +1,8 @@
+### 查询所有模板信息
+GET http://{{host}}:{{port}}/template/list
+
+### 根据模板id查询模板信息
+GET http://{{host}}:{{port}}/template/1600142461649461249
+
+### 根据模板businessType查询模板信息
+GET http://{{host}}:{{port}}/template?businessType=TEST_NOTE_CODE
