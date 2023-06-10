@@ -2,7 +2,10 @@ package com.xingchi.tornado.basic;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 结果返回对象工厂
@@ -12,23 +15,28 @@ import lombok.Data;
  * @modified xingchi
  */
 @Data
-public class Result<T> {
+@Schema(name = "通用返回结果")
+public class Result<T> implements Serializable {
 
     /**
      * 状态码
      */
+    @Schema(name = "响应码", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer code;
 
     /**
      * 提示消息
      */
+    @Schema(name = "提示消息", requiredMode = Schema.RequiredMode.REQUIRED)
     private String message;
 
     /**
      * 操作状态
      */
+    @Schema(name = "操作状态", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean success;
 
+    @Schema(name = "数据载体", requiredMode = Schema.RequiredMode.REQUIRED)
     private T data;
 
     /**
@@ -66,7 +74,7 @@ public class Result<T> {
         this(CommonCode.SUCCESS, data);
     }
 
-    private Result() {
+    protected Result() {
         this((T) null);
     }
 
