@@ -3,7 +3,6 @@ package com.xingchi.tornado.basic;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -20,8 +19,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @Schema(name = "分页结果返回")
-@EqualsAndHashCode(callSuper = true)
-public class PageResult<T> extends Result<List<T>> {
+public class PageResult<T> {
 
     /**
      * 当前页码

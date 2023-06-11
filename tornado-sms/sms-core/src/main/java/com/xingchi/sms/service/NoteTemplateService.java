@@ -1,7 +1,10 @@
 package com.xingchi.sms.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xingchi.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.sms.model.NoteTemplate;
+import com.xingchi.tornado.basic.PageResult;
+import com.xingchi.tornado.basic.PaginationQuery;
 
 import java.util.List;
 
@@ -52,4 +55,12 @@ public interface NoteTemplateService extends IService<NoteTemplate> {
      * @return                  添加后的模板
      */
     NoteTemplate create(NoteTemplate noteTemplate);
+
+    /**
+     * 分页查询所有模板信息
+     *
+     * @param query             分页参数
+     * @return
+     */
+    PageResult<NoteTemplate> pageList(NoteTemplateQuery query);
 }

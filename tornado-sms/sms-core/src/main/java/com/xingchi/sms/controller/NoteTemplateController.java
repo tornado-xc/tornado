@@ -1,8 +1,15 @@
 package com.xingchi.sms.controller;
 
 import com.xingchi.sms.common.model.dto.NoteTemplateDTO;
+import com.xingchi.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.sms.model.NoteTemplate;
 import com.xingchi.sms.service.NoteTemplateService;
+import com.xingchi.tornado.basic.PageResult;
+import com.xingchi.tornado.basic.PaginationQuery;
+import com.xingchi.tornado.basic.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,29 +32,40 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "短信模板控制器", description = "包含短信模板相关的查询、修改、添加等相关接口")
 @RequestMapping("/template")
 public class NoteTemplateController {
 
-    private NoteTemplateService noteTemplateService;
+    private final NoteTemplateService noteTemplateService;
 
-    @GetMapping("/list")
-    public List<NoteTemplate> findAll() {
+    @GetMapping("/list/all")
+    @Operation(summary = "查询所有的短信模板信息", description = "查询所有的短信模板信息不分页")
+    public Result<List<NoteTemplate>> findAll() {
         // 查询所有短信模板
-        return noteTemplateService.findAll();
+        return Result.ok(noteTemplateService.findAll());
+    }
+
+    @GetMapping("/list/page")
+    @Operation(summary = "分页查询短信模板信息")
+    public Result<PageResult<NoteTemplate>> pageList(NoteTemplateQuery query) {
+        return Result.ok(noteTemplateService.pageList(query));
     }
 
     @GetMapping("/{id}")
-    public NoteTemplate findById(@PathVariable("id") Long id) {
-        return noteTemplateService.selectById(id);
+    @Operation(summary = "根据id查询出指定模板信息")
+    public Result<NoteTemplate> findById(@PathVariable("id") Long id) {
+        return Result.ok(noteTemplateService.selectById(id));
     }
 
     @GetMapping
-    public NoteTemplate findByBusinessType(@RequestParam("businessType") String businessType) {
-        return noteTemplateService.selectByBusinessType(businessType);
+    @Operation(summary = "根据业务类型查询指定的短信模板", description = "根据业务消息类型查询指定模板，如：NOTE_CODE、SYSTEM_NOTICE等")
+    public Result<NoteTemplate> findByBusinessType(@RequestParam("businessType") String businessType) {
+        return Result.ok(noteTemplateService.selectByBusinessType(businessType));
     }
 
     @PostMapping
-    public NoteTemplate createNoteTemplate(@RequestBody NoteTemplateDTO noteTemplateDTO) {
+    @Operation(summary = "新增一个短信模板", description = "创建一个新的短信模板")
+    public Result<NoteTemplate> createNoteTemplate(@RequestBody NoteTemplateDTO noteTemplateDTO) {
         return null;
     }
 }

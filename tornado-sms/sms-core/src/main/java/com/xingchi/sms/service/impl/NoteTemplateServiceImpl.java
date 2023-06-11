@@ -2,12 +2,16 @@ package com.xingchi.sms.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xingchi.sms.common.enums.NoteType;
 import com.xingchi.sms.common.enums.PlatformType;
+import com.xingchi.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.sms.dao.NoteTemplateDao;
 import com.xingchi.sms.model.NoteTemplate;
 import com.xingchi.sms.service.NoteTemplateService;
+import com.xingchi.tornado.basic.PageResult;
+import com.xingchi.tornado.core.exception.ExceptionWrap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -32,12 +36,17 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
 
     @Override
     public NoteTemplate selectById(Long id) {
-        return noteTemplateDao.selectById(id);
+        NoteTemplate noteTemplate = noteTemplateDao.selectById(id);
+        Assert.notNull(noteTemplate, "短信模板不存在");
+        return noteTemplate;
     }
 
     @Override
     public NoteTemplate selectByBusinessType(String businessType) {
-        return noteTemplateDao.selectOne(Wrappers.<NoteTemplate>lambdaQuery().eq(NoteTemplate::getBusinessType, businessType));
+
+        NoteTemplate noteTemplate = noteTemplateDao.selectOne(Wrappers.<NoteTemplate>lambdaQuery().eq(NoteTemplate::getBusinessType, businessType));
+        Assert.notNull(noteTemplate, String.format("指定业务类型的消息模板不存在'%s'", businessType));
+        return noteTemplate;
     }
 
     @Override
@@ -50,6 +59,12 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
 
         this.updateById(noteTemplate);
         return noteTemplate;
+    }
+
+    @Override
+    public PageResult<NoteTemplate> pageList(NoteTemplateQuery query) {
+        Page<NoteTemplate> noteTemplatePage = this.baseMapper.selectPage(new Page<>(query.getPageNum(), query.getPageSize()), null);
+        return PageResult.fetchPage(noteTemplatePage);
     }
 
     @Override

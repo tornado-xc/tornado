@@ -74,7 +74,7 @@ public class Result<T> implements Serializable {
         this(CommonCode.SUCCESS, data);
     }
 
-    protected Result() {
+    private Result() {
         this((T) null);
     }
 
@@ -109,6 +109,31 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> fail() {
         return new Result<>(CommonCode.FAIL);
+    }
+
+    /**
+     * 自定义异常消息
+     *
+     * @param message   状态码
+     * @param <T>       数据类型
+     * @return          失败错误码
+     */
+    public static <T> Result<T> fail(String message) {
+        CommonCode fail = CommonCode.FAIL;
+        return new Result<>(fail.code(), message, false, null);
+    }
+
+    /**
+     * 自定义异常消息
+     *
+     * @param message   状态码
+     * @param data      异常是返回数据
+     * @param <T>       数据类型
+     * @return          失败错误码
+     */
+    public static <T> Result<T> fail(String message, T data) {
+        CommonCode fail = CommonCode.FAIL;
+        return new Result<>(fail.code(), message, false, data);
     }
 
     /**

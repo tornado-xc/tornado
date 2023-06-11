@@ -1,5 +1,8 @@
 ### 查询所有模板信息
-GET http://{{host}}:{{port}}/template/list
+GET http://{{host}}:{{port}}/template/list/all
+
+### 分页查询
+GET http://{{host}}:{{port}}/template/list/page?pageSize=1&pageNum=1
 
 ### 根据模板id查询模板信息
 GET http://{{host}}:{{port}}/template/1600142461649461249
