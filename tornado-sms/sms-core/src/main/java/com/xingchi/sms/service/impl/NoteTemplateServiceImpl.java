@@ -63,7 +63,7 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
 
     @Override
     public PageResult<NoteTemplate> pageList(NoteTemplateQuery query) {
-        Page<NoteTemplate> noteTemplatePage = this.baseMapper.selectPage(new Page<>(query.getPageNum(), query.getPageSize()), null);
+        Page<NoteTemplate> noteTemplatePage = this.page(new Page<>(query.getPageNum(), query.getPageSize()), null);
         return PageResult.fetchPage(noteTemplatePage);
     }
 

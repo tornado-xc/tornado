@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.xingchi</groupId>
-            <artifactId>tornado-common</artifactId>
+            <artifactId>tornado-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

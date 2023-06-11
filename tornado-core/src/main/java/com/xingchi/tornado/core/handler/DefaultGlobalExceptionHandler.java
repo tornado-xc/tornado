@@ -38,7 +38,6 @@ import java.util.stream.Collectors;
 /**
  *
  */
-@RestControllerAdvice(annotations = {RestController.class, Controller.class})
 @Slf4j
 public abstract class DefaultGlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
