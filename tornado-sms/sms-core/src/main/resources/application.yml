@@ -26,3 +26,11 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+logging:
+  level:
+    com.xingchi: debug
+xingchi:
+  tornado:
+    logging:
+      enable: true

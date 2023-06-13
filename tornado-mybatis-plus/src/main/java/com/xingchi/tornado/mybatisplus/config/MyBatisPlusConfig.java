@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.xingchi.tornado.mybatisplus.plugins.SqlLogInterceptor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyBatisPlusConfig {
 
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
 
@@ -28,4 +32,10 @@ public class MyBatisPlusConfig {
         return interceptor;
     }
 
+    @Bean
+    @ConditionalOnProperty(value = "xingchi.tornado.logging.enable", havingValue = "true")
+    @ConditionalOnMissingBean
+    public SqlLogInterceptor sqlLogInterceptor() {
+        return new SqlLogInterceptor();
+    }
 }
