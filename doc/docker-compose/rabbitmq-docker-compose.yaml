@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  rabbit:
+    image: rabbitmq:3.8-management
+    hostname: rabbit
+    container_name: "rabbitmq"
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "51883:1883"
+      - "15675:15675"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - /var/docker/rabbitmq/data:/var/lib/rabbitmq
