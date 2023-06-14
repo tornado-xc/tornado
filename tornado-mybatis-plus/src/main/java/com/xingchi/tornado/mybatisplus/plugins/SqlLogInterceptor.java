@@ -30,6 +30,11 @@ import java.lang.reflect.Proxy;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -143,6 +148,12 @@ public class SqlLogInterceptor implements Interceptor {
             handler = "'" + parameterObject + "'";
         } else if (parameterObject instanceof Date) {
             handler = "'" + new SimpleDateFormat(DateTimeFormat.DATE_TIME_FORMAT).format(parameterObject) + "'";
+        } else if (parameterObject instanceof LocalDateTime) {
+            handler = "'" + DateTimeFormatter.ofPattern(DateTimeFormat.DATE_TIME_FORMAT).format((TemporalAccessor) parameterObject) + "'";
+        }  else if (parameterObject instanceof LocalDate) {
+            handler = "'" + DateTimeFormatter.ofPattern(DateTimeFormat.DATE_FORMAT).format((TemporalAccessor) parameterObject) + "'";
+        }  else if (parameterObject instanceof LocalTime) {
+            handler = "'" + DateTimeFormatter.ofPattern(DateTimeFormat.TIME_FORMAT).format((TemporalAccessor) parameterObject) + "'";
         } else {
             handler = parameterObject.toString();
         }
