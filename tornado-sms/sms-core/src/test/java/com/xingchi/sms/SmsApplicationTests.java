@@ -18,14 +18,4 @@ public class SmsApplicationTests {
     @Autowired
     private NoteTemplateService noteTemplateService;
 
-    @Test
-    @Transactional
-    public void testInterceptor() {
-        NoteTemplate noteTemplate = new NoteTemplate();
-        noteTemplate.setId(1L);
-        noteTemplate.setDescription("ASDFASDF");
-        noteTemplate.setSignName("龙卷风");
-        noteTemplateService.updateTemplateById(noteTemplate);
-    }
-
 }
