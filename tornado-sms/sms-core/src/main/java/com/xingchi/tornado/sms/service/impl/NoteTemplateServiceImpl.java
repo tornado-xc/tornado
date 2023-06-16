@@ -76,10 +76,6 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
             type = NoteType.OTHER.code();
         }
 
-        Assert.notNull(noteTemplateDTO.getCode(), "请指定消息模板编码");
-
-        Assert.isTrue(StringUtils.isNotBlank(noteTemplateDTO.getSignName()), "模板签名不能为空");
-
         noteTemplateDTO.setPlatform(platform);
         noteTemplateDTO.setType(type);
         return this.save(BeanCopyUtils.copyProperties(noteTemplateDTO, NoteTemplate.class));

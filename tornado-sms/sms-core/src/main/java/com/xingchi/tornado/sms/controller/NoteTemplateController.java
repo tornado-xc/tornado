@@ -10,6 +10,7 @@ import com.xingchi.tornado.basic.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +63,7 @@ public class NoteTemplateController {
 
     @PostMapping
     @Operation(summary = "新增一个短信模板", description = "创建一个新的短信模板")
-    public Result<Boolean> createNoteTemplate(@RequestBody NoteTemplateDTO noteTemplateDTO) {
+    public Result<Boolean> createNoteTemplate(@RequestBody @Validated NoteTemplateDTO noteTemplateDTO) {
         return Result.ok(noteTemplateService.create(noteTemplateDTO));
     }
 }

@@ -9,3 +9,17 @@ GET http://{{host}}:{{port}}/template/1600142461649461249
 
 ### 根据模板businessType查询模板信息
 GET http://{{host}}:{{port}}/template?businessType=TEST_NOTE_CODE
+
+### 创建短信模板
+POST http://{{host}}:{{port}}/template
+Content-Type: application/json
+
+{
+  "code": "3D3434",
+  "content": "测试添加模板",
+  "businessType": "TEST_TEMPLATE_NEW_NEW",
+  "type": 1,
+  "platform": 1,
+  "signName": "tornado",
+  "description": "嘎对方告诉对方"
+}

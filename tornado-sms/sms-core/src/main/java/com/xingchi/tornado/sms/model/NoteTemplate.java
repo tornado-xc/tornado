@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.xingchi.tornado.core.config.anno.JsonEnum;
+import com.xingchi.tornado.mybatisplus.plugins.anno.AutoId;
 import com.xingchi.tornado.sms.common.enums.NoteType;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class NoteTemplate {
     /**
      * id
      */
-    @TableId(type = IdType.INPUT)
+    @AutoId
     private Long id;
 
     /**
