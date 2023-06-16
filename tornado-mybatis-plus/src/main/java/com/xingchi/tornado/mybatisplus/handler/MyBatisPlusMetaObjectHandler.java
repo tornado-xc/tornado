@@ -2,7 +2,7 @@ package com.xingchi.tornado.mybatisplus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.xingchi.tornado.constant.FiledConstants;
-import com.xingchi.unique.client.UniqueCodeClient;
+import com.xingchi.tornado.unique.client.UniqueCodeClient;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
