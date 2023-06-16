@@ -50,18 +50,6 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
     }
 
     @Override
-    public NoteTemplate updateTemplateById(NoteTemplate noteTemplate) {
-        Assert.notNull(noteTemplate, "模板信息不能为空");
-        Assert.notNull(noteTemplate.getId(), "模板id不能为空");
-
-        NoteTemplate sourceTemplate = this.selectById(noteTemplate.getId());
-        Assert.notNull(sourceTemplate, "不存在的该模板信息");
-
-        this.updateById(noteTemplate);
-        return noteTemplate;
-    }
-
-    @Override
     public PageResult<NoteTemplate> pageList(NoteTemplateQuery query) {
         Page<NoteTemplate> noteTemplatePage = this.page(new Page<>(query.getPageNum(), query.getPageSize()), null);
         return PageResult.fetchPage(noteTemplatePage);

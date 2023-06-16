@@ -41,14 +41,6 @@ public interface NoteTemplateService extends IService<NoteTemplate> {
     NoteTemplate selectByBusinessType(String businessType);
 
     /**
-     * 更新模板信息
-     *
-     * @param noteTemplate      模板信息
-     * @return                  更新后的数据
-     */
-    NoteTemplate updateTemplateById(NoteTemplate noteTemplate);
-
-    /**
      * 添加一个模板
      *
      * @param noteTemplate      模板信息
