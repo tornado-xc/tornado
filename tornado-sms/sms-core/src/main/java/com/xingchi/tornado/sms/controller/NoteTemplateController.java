@@ -2,6 +2,7 @@ package com.xingchi.tornado.sms.controller;
 
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateQuery;
+import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
 import com.xingchi.tornado.basic.PageResult;
@@ -36,32 +37,32 @@ public class NoteTemplateController {
 
     @GetMapping("/list/all")
     @Operation(summary = "查询所有的短信模板信息", description = "查询所有的短信模板信息不分页")
-    public Result<List<NoteTemplate>> findAll() {
+    public Result<List<NoteTemplateVO>> findAll() {
         // 查询所有短信模板
         return Result.ok(noteTemplateService.findAll());
     }
 
     @GetMapping("/list/page")
     @Operation(summary = "分页查询短信模板信息")
-    public Result<PageResult<NoteTemplate>> pageList(NoteTemplateQuery query) {
+    public Result<PageResult<NoteTemplateVO>> pageList(NoteTemplateQuery query) {
         return Result.ok(noteTemplateService.pageList(query));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "根据id查询出指定模板信息")
-    public Result<NoteTemplate> findById(@PathVariable("id") Long id) {
+    public Result<NoteTemplateVO> findById(@PathVariable("id") Long id) {
         return Result.ok(noteTemplateService.selectById(id));
     }
 
     @GetMapping
     @Operation(summary = "根据业务类型查询指定的短信模板", description = "根据业务消息类型查询指定模板，如：NOTE_CODE、SYSTEM_NOTICE等")
-    public Result<NoteTemplate> findByBusinessType(@RequestParam("businessType") String businessType) {
+    public Result<NoteTemplateVO> findByBusinessType(@RequestParam("businessType") String businessType) {
         return Result.ok(noteTemplateService.selectByBusinessType(businessType));
     }
 
     @PostMapping
     @Operation(summary = "新增一个短信模板", description = "创建一个新的短信模板")
-    public Result<NoteTemplate> createNoteTemplate(@RequestBody NoteTemplateDTO noteTemplateDTO) {
-        return null;
+    public Result<Boolean> createNoteTemplate(@RequestBody NoteTemplateDTO noteTemplateDTO) {
+        return Result.ok(noteTemplateService.create(noteTemplateDTO));
     }
 }

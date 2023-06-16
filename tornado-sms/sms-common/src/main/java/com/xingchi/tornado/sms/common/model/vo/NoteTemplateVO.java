@@ -1,5 +1,6 @@
-package com.xingchi.tornado.sms.common.model.dto;
+package com.xingchi.tornado.sms.common.model.vo;
 
+import com.xingchi.tornado.core.config.anno.JsonEnum;
 import com.xingchi.tornado.sms.common.enums.NoteType;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,22 +12,22 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @author xingchi
- * @date 2023/6/5 21:51
- * @modified xingchi
+ * @author xiaoya
+ * @date 2023/6/16 14:49
+ * @modified xiaoya
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Schema(name = "短信模板实体")
-public class NoteTemplateDTO {
+public class NoteTemplateVO {
 
     /**
      * 模板编码（需在响应的平台上进行配置）
      */
     @Schema(name = "模板编码")
-    @NotBlank(message = "消息模板编码不能为空")
+    @NotBlank(message = "消息模板不能为空")
     private String code;
 
     /**
@@ -50,19 +51,20 @@ public class NoteTemplateDTO {
      * 通知类型 {@link NoteType#code()}
      */
     @Schema(name = "通知类型")
+    @JsonEnum(NoteType.class)
     private Integer type;
 
     /**
      * 平台类型 {@link PlatformType#code()}
      */
     @Schema(name = "平台类型")
+    @JsonEnum(PlatformType.class)
     private Integer platform;
 
     /**
      * 签名
      */
     @Schema(name = "签名")
-    @NotBlank(message = "模板签名不能为空")
     private String signName;
 
     /**

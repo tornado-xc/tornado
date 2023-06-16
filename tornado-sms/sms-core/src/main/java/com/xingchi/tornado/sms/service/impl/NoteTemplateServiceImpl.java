@@ -6,15 +6,20 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xingchi.tornado.sms.common.enums.NoteType;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
+import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateQuery;
+import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
 import com.xingchi.tornado.sms.dao.NoteTemplateDao;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
 import com.xingchi.tornado.basic.PageResult;
+import com.xingchi.tornado.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,55 +34,54 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
     private NoteTemplateDao noteTemplateDao;
 
     @Override
-    public List<NoteTemplate> findAll() {
-        return noteTemplateDao.selectList(Wrappers.<NoteTemplate>lambdaQuery());
+    public List<NoteTemplateVO> findAll() {
+        List<NoteTemplate> noteTemplates = noteTemplateDao.selectList(Wrappers.<NoteTemplate>lambdaQuery());
+        if (CollectionUtils.isEmpty(noteTemplates)) {
+            return Collections.emptyList();
+        }
+        return BeanCopyUtils.copyList(noteTemplates, NoteTemplateVO.class);
     }
 
     @Override
-    public NoteTemplate selectById(Long id) {
+    public NoteTemplateVO selectById(Long id) {
         NoteTemplate noteTemplate = noteTemplateDao.selectById(id);
         Assert.notNull(noteTemplate, "短信模板不存在");
-        return noteTemplate;
+        return BeanCopyUtils.copyProperties(noteTemplate, NoteTemplateVO.class);
     }
 
     @Override
-    public NoteTemplate selectByBusinessType(String businessType) {
+    public NoteTemplateVO selectByBusinessType(String businessType) {
 
         NoteTemplate noteTemplate = noteTemplateDao.selectOne(Wrappers.<NoteTemplate>lambdaQuery().eq(NoteTemplate::getBusinessType, businessType));
         Assert.notNull(noteTemplate, String.format("指定业务类型的消息模板不存在'%s'", businessType));
-        return noteTemplate;
+        return BeanCopyUtils.copyProperties(noteTemplate, NoteTemplateVO.class);
     }
 
     @Override
-    public PageResult<NoteTemplate> pageList(NoteTemplateQuery query) {
+    public PageResult<NoteTemplateVO> pageList(NoteTemplateQuery query) {
         Page<NoteTemplate> noteTemplatePage = this.page(new Page<>(query.getPageNum(), query.getPageSize()), null);
-        return PageResult.fetchPage(noteTemplatePage);
+        return PageResult.fetchPage(noteTemplatePage, f -> BeanCopyUtils.copyProperties(f, NoteTemplateVO.class));
     }
 
     @Override
-    public NoteTemplate create(NoteTemplate noteTemplate) {
+    public Boolean create(NoteTemplateDTO noteTemplateDTO) {
 
-        noteTemplate.setId(null);
-        Integer platform = noteTemplate.getPlatform();
+        Integer platform = noteTemplateDTO.getPlatform();
         if (!PlatformType.exists(platform)) {
             platform = PlatformType.OTHER.code();
         }
 
-        String content = noteTemplate.getContent();
-        Assert.isTrue(StringUtils.isNotBlank(content), "消息模板不能为空");
-
-        Integer type = noteTemplate.getType();
+        Integer type = noteTemplateDTO.getType();
         if (!NoteType.exists(type)) {
             type = NoteType.OTHER.code();
         }
 
-        Assert.notNull(noteTemplate.getCode(), "请指定消息模板编码");
+        Assert.notNull(noteTemplateDTO.getCode(), "请指定消息模板编码");
 
-        Assert.isTrue(StringUtils.isNotBlank(noteTemplate.getSignName()), "模板签名不能为空");
+        Assert.isTrue(StringUtils.isNotBlank(noteTemplateDTO.getSignName()), "模板签名不能为空");
 
-        noteTemplate.setPlatform(platform);
-        noteTemplate.setType(type);
-        this.save(noteTemplate);
-        return noteTemplate;
+        noteTemplateDTO.setPlatform(platform);
+        noteTemplateDTO.setType(type);
+        return this.save(BeanCopyUtils.copyProperties(noteTemplateDTO, NoteTemplate.class));
     }
 }
