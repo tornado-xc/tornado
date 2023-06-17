@@ -1,5 +1,6 @@
 package com.xingchi.tornado.sms.common.model.dto;
 
+import com.xingchi.tornado.core.config.anno.JsonEnum;
 import com.xingchi.tornado.sms.common.enums.NoteType;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -50,12 +51,14 @@ public class NoteTemplateDTO {
      * 通知类型 {@link NoteType#code()}
      */
     @Schema(name = "通知类型")
+    @JsonEnum(value = NoteType.class)
     private Integer type;
 
     /**
      * 平台类型 {@link PlatformType#code()}
      */
     @Schema(name = "平台类型")
+    @JsonEnum(value = PlatformType.class)
     private Integer platform;
 
     /**
