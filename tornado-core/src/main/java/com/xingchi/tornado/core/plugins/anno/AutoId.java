@@ -1,4 +1,4 @@
-package com.xingchi.tornado.mybatisplus.plugins.anno;
+package com.xingchi.tornado.core.plugins.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

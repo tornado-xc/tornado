@@ -2,6 +2,7 @@ package com.xingchi.tornado.sms.exception;
 
 import com.xingchi.tornado.core.handler.DefaultGlobalExceptionHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

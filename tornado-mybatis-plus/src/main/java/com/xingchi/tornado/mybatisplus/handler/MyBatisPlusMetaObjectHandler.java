@@ -2,9 +2,7 @@ package com.xingchi.tornado.mybatisplus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.xingchi.tornado.constant.FiledConstants;
-import com.xingchi.tornado.unique.client.UniqueCodeClient;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,8 +24,6 @@ import java.util.Objects;
 @ComponentScan(basePackages = {"com.xingchi.unique.client"})
 public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
 
-    private final UniqueCodeClient uniqueCodeClient;
-
     /**
      * String类型全类名
      */
@@ -38,14 +34,11 @@ public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
      */
     private static final String LONG_CLASS_NAME = "java.lang.Long";
 
-    @Autowired
-    public MyBatisPlusMetaObjectHandler(UniqueCodeClient uniqueCodeClient) {
-        this.uniqueCodeClient = uniqueCodeClient;
+    public MyBatisPlusMetaObjectHandler() {
     }
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        Long id = uniqueCodeClient.snowflakeId();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -79,7 +72,6 @@ public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
             }
         }
 
-        this.strictInsertFill(metaObject, FiledConstants.ID, Long.class, id);
         LocalDateTime currentTime = LocalDateTime.now();
         this.strictInsertFill(metaObject, FiledConstants.CREATE_TIME, LocalDateTime.class, currentTime);
         this.strictInsertFill(metaObject, FiledConstants.UPDATE_TIME, LocalDateTime.class, currentTime);
