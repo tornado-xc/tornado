@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class DistributedIdInterceptor implements HandlerInterceptor {
 
-    private UniqueCodeClient uniqueCodeClient;
+    private final UniqueCodeClient uniqueCodeClient;
 
     public DistributedIdInterceptor(UniqueCodeClient uniqueCodeClient) {
         this.uniqueCodeClient = uniqueCodeClient;

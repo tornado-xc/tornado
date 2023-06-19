@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -63,7 +64,7 @@ public class NoteTemplateController {
 
     @PostMapping
     @Operation(summary = "新增一个短信模板", description = "创建一个新的短信模板")
-    public Result<Boolean> createNoteTemplate(@RequestBody @Validated NoteTemplateDTO noteTemplateDTO) {
+    public Result<Boolean> createNoteTemplate(@RequestBody @Valid NoteTemplateDTO noteTemplateDTO) {
         return Result.ok(noteTemplateService.create(noteTemplateDTO));
     }
 }
