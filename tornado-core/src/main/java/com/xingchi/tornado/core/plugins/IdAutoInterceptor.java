@@ -1,7 +1,6 @@
 package com.xingchi.tornado.core.plugins;
 
 import com.xingchi.tornado.core.context.IdContextHolder;
-import com.xingchi.tornado.unique.client.UniqueCodeClient;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -17,6 +16,8 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
+import static com.xingchi.tornado.constant.FiledConstants.ID;
+
 /**
  * id自动填充拦截器
  *
@@ -29,12 +30,10 @@ import java.util.Objects;
 })
 public class IdAutoInterceptor implements Interceptor {
 
-    public static final String ID = "id";
-
     /**
      * 是否强制使用默认id服务生成id
      */
-    private Boolean forceUse;
+    private final Boolean forceUse;
 
     /**
      * 构造

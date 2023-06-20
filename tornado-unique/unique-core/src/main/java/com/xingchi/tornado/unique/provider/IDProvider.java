@@ -19,15 +19,23 @@ public interface IDProvider<T> {
     /**
      * 生成一个id
      *
-     * @return          id
+     * @return id
      */
     T nextId();
 
     /**
+     * 是否支持
+     *
+     * @param type id类型
+     * @return 是否支持
+     */
+    boolean supports(IDProviderType type);
+
+    /**
      * 批量获取id
      *
-     * @param count     获取个数
-     * @return          id
+     * @param count 获取个数
+     * @return id
      */
     default List<T> nextIds(Integer count) {
         if (count == null || count <= 0) {
@@ -40,13 +48,5 @@ public interface IDProvider<T> {
         }
         return result;
     }
-
-    /**
-     * 是否支持
-     *
-     * @param type          id类型
-     * @return              是否支持
-     */
-    boolean supports(IDProviderType type);
 
 }

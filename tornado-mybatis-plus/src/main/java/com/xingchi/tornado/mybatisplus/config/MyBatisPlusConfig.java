@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class MyBatisPlusConfig {
 
     @Bean
+    @ConditionalOnMissingBean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
 
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();

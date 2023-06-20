@@ -17,7 +17,9 @@ Content-Type: application/json
 {
   "code": "3D3434",
   "content": "测试添加模板",
-  "businessType": "13421234123",
+  "businessType": "134212341233333",
   "signName": "tornado",
+  "type": 1,
+  "platform": 1,
   "description": "嘎对方告诉对方"
 }

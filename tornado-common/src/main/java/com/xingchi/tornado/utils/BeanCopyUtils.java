@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xiaoya
  */
 public class BeanCopyUtils {
+
     /**
      * BeanCopier 的缓存
      */
@@ -79,6 +80,7 @@ public class BeanCopyUtils {
      */
     private static class BeanCopierCache {
         private static final BeanCopierCache INSTANCE = new BeanCopierCache();
+        public static final int DEFAULT_CACHE_SIZE = 8192;
         private final Map<String, BeanCopier> beanCopiers = new ConcurrentHashMap<>();
 
         private BeanCopierCache() {
@@ -92,6 +94,11 @@ public class BeanCopyUtils {
             String key = genKey(sourceClass, targetClass);
             BeanCopier copier = beanCopiers.get(key);
             if (copier == null) {
+
+                if (beanCopiers.size() >= DEFAULT_CACHE_SIZE) {
+                    beanCopiers.clear();
+                }
+
                 copier = BeanCopier.create(sourceClass, targetClass, false);
                 beanCopiers.put(key, copier);
             }
