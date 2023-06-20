@@ -1,5 +1,6 @@
 package com.xingchi.tornado.sms.controller;
 
+import com.xingchi.tornado.core.validation.Create;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
@@ -14,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,7 +66,15 @@ public class NoteTemplateController {
 
     @PostMapping
     @Operation(summary = "新增一个短信模板", description = "创建一个新的短信模板")
-    public Result<Boolean> createNoteTemplate(@RequestBody @Valid NoteTemplateDTO noteTemplateDTO) {
+    public Result<Boolean> createNoteTemplate(@RequestBody @Validated(value = Create.class) NoteTemplateDTO noteTemplateDTO) {
         return Result.ok(noteTemplateService.create(noteTemplateDTO));
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "更新短信模板", description = "更新模板信息")
+    public Result<Boolean> updateTemplate(@PathVariable("id") Long id,
+                                          @RequestBody NoteTemplateDTO noteTemplateDTO) {
+        return Result.ok(noteTemplateService.updateTemplate(id, noteTemplateDTO));
+    }
+
 }

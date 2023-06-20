@@ -95,7 +95,7 @@ public class BeanCopyUtils {
             BeanCopier copier = beanCopiers.get(key);
             if (copier == null) {
 
-                if (beanCopiers.size() >= DEFAULT_CACHE_SIZE) {
+                if (beanCopiers.size() > DEFAULT_CACHE_SIZE) {
                     beanCopiers.clear();
                 }
 

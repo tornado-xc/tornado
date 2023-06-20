@@ -56,4 +56,13 @@ public interface NoteTemplateService extends IService<NoteTemplate> {
      * @return
      */
     PageResult<NoteTemplateVO> pageList(NoteTemplateQuery query);
+
+    /**
+     * 根据id更新短信模板信息
+     *
+     * @param id                短信模板id
+     * @param noteTemplateDTO   需要更新的信息
+     * @return                  是否更新成功
+     */
+    Boolean updateTemplate(Long id, NoteTemplateDTO noteTemplateDTO);
 }

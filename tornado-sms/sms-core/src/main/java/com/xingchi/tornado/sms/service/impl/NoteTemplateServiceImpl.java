@@ -80,4 +80,15 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
         noteTemplateDTO.setType(type);
         return this.save(BeanCopyUtils.copyProperties(noteTemplateDTO, NoteTemplate.class));
     }
+
+    @Override
+    public Boolean updateTemplate(Long id, NoteTemplateDTO noteTemplateDTO) {
+
+        NoteTemplate noteTemplate = this.baseMapper.selectById(id);
+        Assert.notNull(noteTemplate, String.format("短信模板%s不存在", id));
+
+        NoteTemplate template = BeanCopyUtils.copyProperties(noteTemplateDTO, NoteTemplate.class);
+        template.setId(id);
+        return this.updateById(template);
+    }
 }

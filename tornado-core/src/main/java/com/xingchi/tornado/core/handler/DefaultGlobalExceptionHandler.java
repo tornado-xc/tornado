@@ -111,7 +111,7 @@ public abstract class DefaultGlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public Result<String> illegalArgumentException(IllegalArgumentException ex, HttpServletRequest request) {
         log.warn("IllegalArgumentException:", ex);
-        return Result.fail("无效参数异常");
+        return Result.fail("无效参数异常: " + ex.getMessage());
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)

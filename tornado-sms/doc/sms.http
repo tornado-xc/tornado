@@ -23,3 +23,15 @@ Content-Type: application/json
   "platform": 1,
   "description": "嘎对方告诉对方"
 }
+
+### 更新短信模板
+PUT http://{{host}}:{{port}}/template/106207057543303176
+Content-Type: application/json
+
+{
+  "code": "更新一下",
+  "content": "更新一下测试添加模板",
+  "businessType": "UPDATE_TEST_Test1",
+  "signName": "tornado",
+  "description": "嘎对方告诉对方"
+}

@@ -1,6 +1,7 @@
 package com.xingchi.tornado.sms.common.model.dto;
 
 import com.xingchi.tornado.core.config.anno.JsonEnum;
+import com.xingchi.tornado.core.validation.Create;
 import com.xingchi.tornado.core.validation.EnumCheck;
 import com.xingchi.tornado.sms.common.enums.NoteType;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
@@ -28,14 +29,14 @@ public class NoteTemplateDTO {
      * 模板编码（需在响应的平台上进行配置）
      */
     @Schema(name = "模板编码")
-    @NotBlank(message = "消息模板编码不能为空")
+    @NotBlank(message = "消息模板编码不能为空", groups = Create.class)
     private String code;
 
     /**
      * 模板消息体
      */
     @Schema(name = "模板消息体")
-    @NotBlank(message = "模板消息体不能为空")
+    @NotBlank(message = "模板消息体不能为空", groups = Create.class)
     private String content;
 
     /**
@@ -45,7 +46,7 @@ public class NoteTemplateDTO {
      *      - 支付推送：PAY_PUSH
      */
     @Schema(name = "业务类型-需唯一")
-    @NotBlank(message = "业务类型不能为空")
+    @NotBlank(message = "业务类型不能为空", groups = Create.class)
     private String businessType;
 
     /**
@@ -68,7 +69,7 @@ public class NoteTemplateDTO {
      * 签名
      */
     @Schema(name = "签名")
-    @NotBlank(message = "模板签名不能为空")
+    @NotBlank(message = "模板签名不能为空", groups = Create.class)
     private String signName;
 
     /**
