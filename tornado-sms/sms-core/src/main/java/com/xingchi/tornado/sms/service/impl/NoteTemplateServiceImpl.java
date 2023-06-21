@@ -1,9 +1,9 @@
 package com.xingchi.tornado.sms.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xingchi.tornado.basic.PageResult;
 import com.xingchi.tornado.sms.common.enums.NoteType;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
@@ -12,8 +12,8 @@ import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
 import com.xingchi.tornado.sms.dao.NoteTemplateDao;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
-import com.xingchi.tornado.basic.PageResult;
 import com.xingchi.tornado.utils.BeanCopyUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -28,10 +28,10 @@ import java.util.List;
  * @modified xingchi
  */
 @Service
+@RequiredArgsConstructor
 public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTemplate> implements NoteTemplateService {
 
-    @Autowired
-    private NoteTemplateDao noteTemplateDao;
+    private final NoteTemplateDao noteTemplateDao;
 
     @Override
     public List<NoteTemplateVO> findAll() {

@@ -24,6 +24,7 @@ public interface IDGeneratorService {
     /**
      * 雪花id生成器集合
      *
+     * @param count     生成个数
      * @return          雪花id
      */
     List<Long> snowflakeIds(Integer count);
@@ -38,6 +39,7 @@ public interface IDGeneratorService {
     /**
      * 批量生成多个uuid, 默认移除短横线
      *
+     * @param count     生成个数
      * @return                  uuid
      */
     List<String> uuids(Integer count);
@@ -52,6 +54,7 @@ public interface IDGeneratorService {
     /**
      * 生成redisId
      *
+     * @param count     生成个数
      * @return          redis自增id
      */
     List<Long> redisIds(Integer count);

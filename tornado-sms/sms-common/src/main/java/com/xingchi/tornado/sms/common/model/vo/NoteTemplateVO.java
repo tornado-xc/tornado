@@ -27,14 +27,12 @@ public class NoteTemplateVO {
      * 模板编码（需在响应的平台上进行配置）
      */
     @Schema(name = "模板编码")
-    @NotBlank(message = "消息模板不能为空")
     private String code;
 
     /**
      * 模板消息体
      */
     @Schema(name = "模板消息体")
-    @NotBlank(message = "模板消息体不能为空")
     private String content;
 
     /**
@@ -44,7 +42,6 @@ public class NoteTemplateVO {
      *      - 支付推送：PAY_PUSH
      */
     @Schema(name = "业务类型-需唯一")
-    @NotBlank(message = "业务类型不能为空")
     private String businessType;
 
     /**

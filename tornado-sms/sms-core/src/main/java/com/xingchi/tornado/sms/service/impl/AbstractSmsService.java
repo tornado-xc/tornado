@@ -1,9 +1,11 @@
 package com.xingchi.tornado.sms.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteService;
 import com.xingchi.tornado.basic.BaseParameter;
 import com.xingchi.tornado.core.exception.ExceptionWrap;
+import com.xingchi.tornado.sms.service.NoteTemplateService;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -18,6 +20,12 @@ import java.util.Objects;
  */
 public abstract class AbstractSmsService implements NoteService {
 
+    private final NoteTemplateService noteTemplateService;
+
+    public AbstractSmsService(NoteTemplateService noteTemplateService) {
+        this.noteTemplateService = noteTemplateService;
+    }
+
     @Override
     public boolean send(String account, String template, BaseParameter parameter) {
 
@@ -27,7 +35,7 @@ public abstract class AbstractSmsService implements NoteService {
         }
 
         // 获取模板信息
-        NoteTemplate noteTemplate = this.getNoteTemplate(template);
+        NoteTemplate noteTemplate = noteTemplateService.getBaseMapper().selectOne(Wrappers.<NoteTemplate>lambdaQuery().eq(NoteTemplate::getBusinessType, template));
 
         if (noteTemplate == null) {
             ExceptionWrap.cast("The specified template could not be found");
@@ -61,13 +69,5 @@ public abstract class AbstractSmsService implements NoteService {
      * @return                  是否发送成功
      */
     public abstract boolean execute(String account, NoteTemplate template, BaseParameter parameter);
-
-    /**
-     * 获取模板
-     *
-     * @param businessType  业务类型
-     * @return              模板信息
-     */
-    public abstract NoteTemplate getNoteTemplate(String businessType);
 
 }
