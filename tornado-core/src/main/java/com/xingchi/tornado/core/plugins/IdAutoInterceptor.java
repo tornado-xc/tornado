@@ -1,6 +1,7 @@
 package com.xingchi.tornado.core.plugins;
 
 import com.xingchi.tornado.core.context.IdContextHolder;
+import com.xingchi.tornado.core.plugins.anno.AutoId;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -13,7 +14,6 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.util.Objects;
 
 import static com.xingchi.tornado.constant.FiledConstants.ID;
@@ -51,12 +51,21 @@ public class IdAutoInterceptor implements Interceptor {
             // 是插入语句
             Object parameterObject = invocation.getArgs()[1];
             MetaObject metaObject = MetaObject.forObject(parameterObject, SystemMetaObject.DEFAULT_OBJECT_FACTORY, SystemMetaObject.DEFAULT_OBJECT_WRAPPER_FACTORY, new DefaultReflectorFactory());
-            Field idField = ReflectionUtils.findField(parameterObject.getClass(), ID);
-            if (idField != null && metaObject.hasSetter(ID)) {
-                if (Objects.isNull(metaObject.getValue(ID)) || forceUse ) {
-                    metaObject.setValue(ID, IdContextHolder.get());
+
+            ReflectionUtils.doWithFields(parameterObject.getClass(), field -> {
+                AutoId annotation = field.getAnnotation(AutoId.class);
+                if (annotation == null && !ID.equals(field.getName())) {
+                    return;
                 }
-            }
+
+                if (Objects.isNull(metaObject.getValue(field.getName())) || forceUse) {
+                    if (Long.class.isAssignableFrom(field.getType())) {
+                        metaObject.setValue(field.getName(), IdContextHolder.get());
+                    } else if (String.class.isAssignableFrom(field.getType())){
+                        metaObject.setValue(field.getName(), IdContextHolder.get().toString());
+                    }
+                }
+            });
         }
         return invocation.proceed();
     }

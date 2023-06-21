@@ -14,6 +14,9 @@ import java.util.Arrays;
  */
 public enum PlatformType implements BaseEnum {
 
+    /**
+     * 厂商
+     */
     ALIYUN(1, "阿里云"),
     TENCENT(2, "腾讯云"),
     OTHER(10, "其他"),
