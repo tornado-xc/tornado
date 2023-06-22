@@ -1,0 +1,50 @@
+### 查询所有模板信息
+GET http://{{host}}:{{port}}/template/list/all
+
+### 分页查询
+GET http://{{host}}:{{port}}/template/list/page?pageSize=10&pageNum=1
+
+### 根据模板id查询模板信息
+GET http://{{host}}:{{port}}/template/1600142461649461249
+
+### 根据模板businessType查询模板信息
+GET http://{{host}}:{{port}}/template?businessType=TEST_NOTE_CODE
+
+### 创建短信模板
+POST http://{{host}}:{{port}}/template
+Content-Type: application/json
+
+{
+  "code": "3D3434",
+  "content": "测试添加模板",
+  "businessType": "134212341233333",
+  "signName": "tornado",
+  "type": 1,
+  "platform": 1,
+  "description": "嘎对方告诉对方"
+}
+
+### 更新短信模板
+PUT http://{{host}}:{{port}}/template/106207057543303176
+Content-Type: application/json
+
+{
+  "code": "更新一下",
+  "content": "更新一下测试添加模板",
+  "businessType": "UPDATE_TEST_Test1",
+  "signName": "tornado",
+  "description": "嘎对方告诉对方"
+}
+
+### 发送短信测试
+POST http://{{host}}:{{port}}/note/send
+Content-Type: application/json
+
+{
+  "templateCode": "NEW_NOTE_TEST",
+  "account": "15285828344",
+  "parameter": {
+    "code": 102342
+  }
+}
+

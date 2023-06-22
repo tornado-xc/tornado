@@ -1,0 +1,18 @@
+version: '3.0'
+services:
+  minio:
+    image: minio/minio
+    restart: always
+    container_name: minio_59000
+    command: server /data --console-address :59001
+    ports:
+      # api port 接口调用
+      - 59000:9000
+      # console port 浏览器访问
+      - 59001:9001
+    environment:
+      MINIO_ROOT_USER: "minio"
+      MINIO_ROOT_PASSWORD: "xy19981123.."
+    volumes:
+      - /var/docker/minio/data:/data
+      - /var/docker/minio/config:/root/.minio

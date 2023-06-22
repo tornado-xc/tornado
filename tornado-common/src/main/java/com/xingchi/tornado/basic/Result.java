@@ -2,7 +2,10 @@ package com.xingchi.tornado.basic;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 结果返回对象工厂
@@ -12,23 +15,28 @@ import lombok.Data;
  * @modified xingchi
  */
 @Data
-public class Result<T> {
+@Schema(name = "通用返回结果")
+public class Result<T> implements Serializable {
 
     /**
      * 状态码
      */
+    @Schema(name = "响应码", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer code;
 
     /**
      * 提示消息
      */
+    @Schema(name = "提示消息", requiredMode = Schema.RequiredMode.REQUIRED)
     private String message;
 
     /**
      * 操作状态
      */
+    @Schema(name = "操作状态", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean success;
 
+    @Schema(name = "数据载体", requiredMode = Schema.RequiredMode.REQUIRED)
     private T data;
 
     /**
@@ -101,6 +109,31 @@ public class Result<T> {
      */
     public static <T> Result<T> fail() {
         return new Result<>(CommonCode.FAIL);
+    }
+
+    /**
+     * 自定义异常消息
+     *
+     * @param message   状态码
+     * @param <T>       数据类型
+     * @return          失败错误码
+     */
+    public static <T> Result<T> fail(String message) {
+        CommonCode fail = CommonCode.FAIL;
+        return new Result<>(fail.code(), message, false, null);
+    }
+
+    /**
+     * 自定义异常消息
+     *
+     * @param message   状态码
+     * @param data      异常是返回数据
+     * @param <T>       数据类型
+     * @return          失败错误码
+     */
+    public static <T> Result<T> fail(String message, T data) {
+        CommonCode fail = CommonCode.FAIL;
+        return new Result<>(fail.code(), message, false, data);
     }
 
     /**

@@ -1,0 +1,19 @@
+version: "2.2"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "80:80"
+      - "9000:8090"
+      - "443:443"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /var/docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /var/docker/nginx/conf.d:/etc/nginx/conf.d
+      - /var/docker/nginx/log:/var/log/nginx
+      - /var/docker/nginx/html:/usr/share/nginx/html

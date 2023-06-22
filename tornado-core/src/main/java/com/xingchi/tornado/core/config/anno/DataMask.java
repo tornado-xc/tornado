@@ -1,7 +1,9 @@
-package com.xingchi.tornado.core.config.datamask;
+package com.xingchi.tornado.core.config.anno;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.xingchi.tornado.core.config.datamask.DataMaskSerializer;
+import com.xingchi.tornado.core.config.datamask.DataMaskType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
