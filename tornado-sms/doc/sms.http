@@ -35,3 +35,16 @@ Content-Type: application/json
   "signName": "tornado",
   "description": "嘎对方告诉对方"
 }
+
+### 发送短信测试
+POST http://{{host}}:{{port}}/note/send
+Content-Type: application/json
+
+{
+  "templateCode": "NEW_NOTE_TEST",
+  "account": "15285828344",
+  "parameter": {
+    "code": 102342
+  }
+}
+

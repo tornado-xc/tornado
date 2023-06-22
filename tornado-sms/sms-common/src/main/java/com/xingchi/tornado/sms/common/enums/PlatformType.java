@@ -15,11 +15,23 @@ import java.util.Arrays;
 public enum PlatformType implements BaseEnum {
 
     /**
-     * 厂商
+     * 阿里云
      */
     ALIYUN(1, "阿里云"),
+
+    /**
+     * 腾讯云
+     */
     TENCENT(2, "腾讯云"),
+
+    /**
+     * 其他
+     */
     OTHER(10, "其他"),
+
+    /**
+     * 默认平台-默认不发送
+     */
     DEFAULT(11, "默认平台-默认不发送"),
 
     ;

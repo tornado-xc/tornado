@@ -1,5 +1,6 @@
 package com.xingchi.tornado.sms;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.xingchi.tornado"})
 @EnableFeignClients("com.xingchi")
+@MapperScan(basePackages = "com.xingchi.tornado.sms.dao")
 public class SmsApplication {
 
     public static void main(String[] args) {

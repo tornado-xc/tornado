@@ -97,8 +97,8 @@ public class NoteAutoConfiguration {
     @Bean
     @Order
     @ConditionalOnMissingBean
-    public SmsService defaultNoteService() {
-        return new DefaultNoteServiceSupport();
+    public SmsService defaultNoteService(NoteTemplateService noteTemplateService) {
+        return new DefaultNoteServiceSupport(noteTemplateService);
     }
 
 }

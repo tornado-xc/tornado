@@ -34,3 +34,9 @@ xingchi:
   tornado:
     logging:
       enable: true
+    sms:
+      enable: true
+      aliyun:
+        access-id: LTAI5tLxUGn4k8HQLQThtw7m
+        access-secret: TgFzbJcrcIPGVfiVIXBFxKY0xHokFv
+      platform-type: aliyun

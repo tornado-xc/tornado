@@ -87,7 +87,7 @@ public interface SmsService {
             // 得到参数名
             String parameterName = group.substring(2, group.length() - 1);
             // 获取参数
-            return parameter.get(parameterName);
+            return  parameter.get(parameterName).toString();
         });
     }
 

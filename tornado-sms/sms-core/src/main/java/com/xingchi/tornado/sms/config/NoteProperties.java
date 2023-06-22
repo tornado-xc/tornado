@@ -11,10 +11,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @modified xingchi
  */
 @Data
-@ConfigurationProperties(prefix = "xingchi.note")
+@ConfigurationProperties(prefix = "xingchi.tornado.sms")
 public class NoteProperties {
 
-    public static final String PLATFORM_TYPE_PREFIX = "xingchi.note.platform-type";
+    public static final String PLATFORM_TYPE_PREFIX = "xingchi.tornado.sms.platform-type";
 
     /**
      * 短信平台

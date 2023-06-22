@@ -44,3 +44,4 @@ public class NoticeDTO {
     private BaseParameter parameter;
 
 }
+
