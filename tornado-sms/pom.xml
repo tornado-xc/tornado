@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tornado-sms</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>sms-client</module>
+        <module>sms-common</module>
+        <module>sms-core</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

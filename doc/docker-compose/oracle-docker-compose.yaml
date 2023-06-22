@@ -1,0 +1,14 @@
+version: '3'
+services:
+  oracle11:
+    image: iatebes/oracle_11g
+    container_name: oracle11g
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    restart: always
+    ports:
+      - "51521:1521"
+
+    volumes:
+      - /var/docker/oracle/oracle-11/data/oracle/:/u01/app/oracle/

@@ -1,0 +1,17 @@
+version: "3.2"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "53306:3306"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /var/docker/mysql/log:/var/log/mysql
+      - /var/docker/mysql/data:/var/lib/mysql
+      - /var/docker/mysql/conf:/etc/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=xy19981123..
+    restart: always
+    privileged: true

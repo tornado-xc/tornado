@@ -1,0 +1,18 @@
+version: "3.0"
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    volumes:
+      - /var/docker/jenkins:/var/jenkins_home
+      - /var/docker/jenkins/run/docker.sock:/var/run/docker.sock
+      - /var/docker/jenkins/docker:/usr/bin/docker
+    ports:
+      - "58090:8080"
+      - "50000:50000"
+    environment:
+      JAVA_OPTS: "-Djava.util.logging.config.file=/var/docker/jenkins/log/log.properties"
+      ENKINS_UC: "https://mirrors.cloud.tencent.com/jenkins/"
+      JENKINS_UC_DOWNLOAD: "https://mirrors.cloud.tencent.com/jenkins/"
+    privileged: true
+    restart: always

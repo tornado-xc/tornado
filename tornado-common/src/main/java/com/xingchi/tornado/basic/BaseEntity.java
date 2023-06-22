@@ -25,17 +25,20 @@ public abstract class BaseEntity<T> implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private T id;
 
+    @TableField(fill = FieldFill.INSERT)
     private T createBy;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private T updateBy;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
     @TableLogic
+    @TableField(select = false)
     private Integer deleted;
 
 }

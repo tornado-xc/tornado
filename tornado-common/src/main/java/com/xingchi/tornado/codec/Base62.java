@@ -6,6 +6,7 @@ package com.xingchi.tornado.codec;
  * @author xingchi
  */
 public class Base62 {
+
     private static final char[] BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
     private static final int BASE = 62;
 

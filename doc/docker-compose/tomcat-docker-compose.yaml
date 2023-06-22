@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+  tomcat: #服务名称，不是容器名，只是在文件中方便观看是按个服务
+    image: tomcat:8.5.73  #依赖的镜像
+    restart: always  # 代表只要docker启动， 就会自动启动这个容器  相当于-restart参数
+    container_name: tomcat  # 容器名称  相当于 --name参数
+    ports:
+      - 8090:8080  #映射端口，可以指定多个，用多个-来写
+    environment:
+      TZ: Asia/Shanghai  #指定时区
+    volumes:
+      - /var/docker/rencai/tomcat/webapps:/usr/local/tomcat/webapps   #挂载数据卷
