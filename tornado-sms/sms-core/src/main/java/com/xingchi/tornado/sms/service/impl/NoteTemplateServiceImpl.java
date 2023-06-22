@@ -10,10 +10,12 @@ import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
 import com.xingchi.tornado.sms.dao.NoteTemplateDao;
+import com.xingchi.tornado.sms.exception.BuilderNotePlatformClientException;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
 import com.xingchi.tornado.utils.BeanCopyUtils;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -67,8 +69,16 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
     public Boolean create(NoteTemplateDTO noteTemplateDTO) {
 
         Integer platform = noteTemplateDTO.getPlatform();
-        if (!PlatformType.exists(platform)) {
+
+        PlatformType instance = PlatformType.getInstance(platform);
+        if (instance == null) {
             platform = PlatformType.OTHER.code();
+        }
+
+        if (PlatformType.TENCENT.isType(instance.code())) {
+            if (StringUtils.isBlank(noteTemplateDTO.getAppId()) || StringUtils.isBlank(noteTemplateDTO.getAppName())) {
+                throw new BuilderNotePlatformClientException("Please specify appId or appName. appId and appName can't empty in TencentCloud platform");
+            }
         }
 
         Integer type = noteTemplateDTO.getType();

@@ -25,6 +25,19 @@ import javax.validation.constraints.NotBlank;
 @Schema(name = "短信模板实体")
 public class NoteTemplateDTO {
 
+
+    /**
+     * appId，如果使用腾讯云，那么该值一定会有
+     */
+    @Schema(name = "应用id")
+    private String appId;
+
+    /**
+     * appName，应用名称与appId配套
+     */
+    @Schema(name = "应用名称")
+    private String appName;
+
     /**
      * 模板编码（需在响应的平台上进行配置）
      */
