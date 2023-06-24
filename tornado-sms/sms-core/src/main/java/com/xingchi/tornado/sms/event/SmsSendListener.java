@@ -5,6 +5,7 @@ import com.xingchi.tornado.sms.model.NoteLogRecord;
 import com.xingchi.tornado.sms.service.NoteLogService;
 import com.xingchi.tornado.utils.BeanCopyUtils;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,7 @@ public class SmsSendListener {
 
     @Async
     @EventListener(SmsSendEvent.class)
-    public void handlerSendEvent(SmsSendEvent event) {
+    public void handlerSendEvent(@NotNull SmsSendEvent event) {
         NoteLogRecord record = event.getRecord();
 
         String account = record.getAccount();
