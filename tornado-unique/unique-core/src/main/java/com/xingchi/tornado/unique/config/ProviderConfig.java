@@ -27,7 +27,11 @@ public class ProviderConfig {
     @ConditionalOnMissingBean
     public RedisProvider redisIdFactory(StringRedisTemplate stringRedisTemplate, UniqueProperties uniqueProperties) {
         UniqueProperties.RedisId redisId = uniqueProperties.getRedisId();
-        return new RedisProvider(stringRedisTemplate, StringUtils.isNotBlank(redisId.getBusinessPrefix()) ? redisId.getBusinessPrefix() : "default");
+        Integer step = redisId.getStep();
+        if (step == null || step <= 0) {
+            step = 1;
+        }
+        return new RedisProvider(stringRedisTemplate, StringUtils.isNotBlank(redisId.getBusinessPrefix()) ? redisId.getBusinessPrefix() : "default", step);
     }
 
     @Bean

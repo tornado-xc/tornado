@@ -23,10 +23,12 @@ public class RedisProvider implements IDProvider<Long> {
     private final StringRedisTemplate stringRedisTemplate;
 
     private final String businessPrefix;
+    private final Integer step;
 
-    public RedisProvider(StringRedisTemplate stringRedisTemplate, String businessPrefix) {
+    public RedisProvider(StringRedisTemplate stringRedisTemplate, String businessPrefix, Integer step) {
         this.stringRedisTemplate = stringRedisTemplate;
         this.businessPrefix = businessPrefix;
+        this.step = step;
     }
 
     /**
@@ -58,7 +60,7 @@ public class RedisProvider implements IDProvider<Long> {
 
         // 根据时间进行区分
         String date = now.format(DateTimeFormatter.ofPattern(FORMAT));
-        long count = stringRedisTemplate.opsForValue().increment("id:" + businessPrefix + ":" + date);
+        long count = stringRedisTemplate.opsForValue().increment("id:" + businessPrefix + ":" + date, step);
         return timestamp << SEQUENCE_BITS | count;
     }
 
