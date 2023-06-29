@@ -31,7 +31,6 @@ public class NoteLogRecord {
     /**
      * 消息id
      */
-    @AutoId
     private Long messageId;
 
     /**

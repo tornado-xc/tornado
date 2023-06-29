@@ -46,7 +46,7 @@ public class IdContextHolder {
     public static Long get() {
         try {
             BlockingQueue<Long> queue = CONTEXT.get();
-            if (queue.size() <= 0) {
+            if (queue.size() == 0) {
                 List<Long> list = uniqueCodeClient.snowflakeIds(10);
                 CONTEXT.get().addAll(list);
             }

@@ -31,6 +31,7 @@ public interface UniqueCodeFeignClient {
 
     @GetMapping("/redis")
     Result<Long> redisId();
+
     @GetMapping("/redis/{count}")
     Result<List<Long>> redisIds(@PathVariable("count") Integer count);
 
