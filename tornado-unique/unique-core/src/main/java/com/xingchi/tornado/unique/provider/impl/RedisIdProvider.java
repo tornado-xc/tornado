@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  * @date 2023/5/3 10:18
  * @modified xingchi
  */
-public class RedisProvider implements IDProvider<Long> {
+public class RedisIdProvider implements IDProvider<Long> {
 
     /**
      * StringRedisTemplate
@@ -25,7 +25,7 @@ public class RedisProvider implements IDProvider<Long> {
     private final String businessPrefix;
     private final Integer step;
 
-    public RedisProvider(StringRedisTemplate stringRedisTemplate, String businessPrefix, Integer step) {
+    public RedisIdProvider(StringRedisTemplate stringRedisTemplate, String businessPrefix, Integer step) {
         this.stringRedisTemplate = stringRedisTemplate;
         this.businessPrefix = businessPrefix;
         this.step = step;
