@@ -6,8 +6,7 @@ import org.redisson.api.RedissonClient;
 
 import java.util.concurrent.TimeUnit;
 
-public class RedisLock
-{
+public class RedisLock {
     private static RedissonClient redissonClient;
 
     /**
@@ -28,8 +27,7 @@ public class RedisLock
      * @param lockKey 锁实例key
      * @return 锁信息
      */
-    private static RLock getRLock(String lockKey)
-    {
+    private static RLock getRLock(String lockKey) {
         return redissonClient.getLock(lockKey);
     }
 
@@ -39,12 +37,22 @@ public class RedisLock
      * @param lockKey 锁实例key
      * @return 锁信息
      */
-    public static RLock lock(String lockKey)
-    {
+    public static void lock(String lockKey) {
         RLock lock = getRLock(lockKey);
         lock.lock();
-        return lock;
     }
+
+    /**
+     * 加锁
+     *
+     * @param lockKey 锁实例key
+     * @return 锁信息
+     */
+    public static void lock(String lockKey, long leaseTime, TimeUnit unit) {
+        RLock lock = getRLock(lockKey);
+        lock.lock(leaseTime, unit);
+    }
+
 
     /**
      * 加锁
@@ -81,12 +89,9 @@ public class RedisLock
     public static boolean tryLock(String lockKey, long waitTime, long leaseTime, TimeUnit unit) {
         RLock rLock = getRLock(lockKey);
         boolean tryLock = false;
-        try
-        {
+        try {
             tryLock = rLock.tryLock(waitTime, leaseTime, unit);
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             return false;
         }
         return tryLock;

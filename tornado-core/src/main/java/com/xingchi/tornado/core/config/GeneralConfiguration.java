@@ -37,7 +37,7 @@ public class GeneralConfiguration {
         config.useSingleServer()
                 .setAddress("redis://" + redisProperties.getHost() + ":" + redisProperties.getPort())
                 .setPassword(redisProperties.getPassword())
-                .setDatabase(redisProperties.getDatabase()); // 更多.set
+                .setDatabase(redisProperties.getDatabase());
 
         RedissonClient redissonClient = Redisson.create(config);
         RedisLock.init(redissonClient, false);
