@@ -1,4 +1,4 @@
-package com.xingchi.tornado.basic;
+package com.xingchi.tornado.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

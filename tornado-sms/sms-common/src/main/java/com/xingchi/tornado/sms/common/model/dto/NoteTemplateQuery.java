@@ -1,6 +1,6 @@
 package com.xingchi.tornado.sms.common.model.dto;
 
-import com.xingchi.tornado.basic.PaginationQuery;
+import com.xingchi.tornado.core.model.PaginationQuery;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

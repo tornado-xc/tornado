@@ -1,10 +1,11 @@
-package com.xingchi.tornado.basic;
+package com.xingchi.tornado.core.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.xingchi.tornado.core.plugins.anno.AutoId;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 @Data
 public abstract class BaseEntity<T> implements Serializable {
 
+    @AutoId
     @TableId(value = "id", type = IdType.INPUT)
     @TableField(fill = FieldFill.INSERT)
     private T id;

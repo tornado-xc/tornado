@@ -3,10 +3,8 @@ package com.xingchi.tornado.sms.model;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.xingchi.tornado.basic.BaseEntity;
 import com.xingchi.tornado.core.plugins.anno.AutoId;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 

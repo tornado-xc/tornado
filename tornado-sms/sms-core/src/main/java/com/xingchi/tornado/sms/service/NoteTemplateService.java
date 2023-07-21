@@ -5,7 +5,7 @@ import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
 import com.xingchi.tornado.sms.model.NoteTemplate;
-import com.xingchi.tornado.basic.PageResult;
+import com.xingchi.tornado.core.model.PageResult;
 
 import java.util.List;
 
