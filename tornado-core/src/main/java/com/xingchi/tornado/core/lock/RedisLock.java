@@ -27,7 +27,7 @@ public class RedisLock {
 
     /**
      * 加锁
-     * 
+     *
      * @param lockKey 锁实例key
      * @return 锁信息
      */
@@ -47,10 +47,20 @@ public class RedisLock {
         lock.lock(leaseTime, unit);
     }
 
+    /**
+     * 加锁
+     *
+     * @param lockKey 锁实例key
+     * @return true=成功；false=失败
+     */
+    public static boolean tryLock(String lockKey) {
+        RLock rLock = getRLock(lockKey);
+        return rLock.tryLock();
+    }
 
     /**
      * 加锁
-     * 
+     *
      * @param lockKey 锁实例key
      * @param leaseTime 上锁后自动释放锁时间
      * @return true=成功；false=失败
@@ -61,7 +71,7 @@ public class RedisLock {
 
     /**
      * 加锁
-     * 
+     *
      * @param lockKey 锁实例key
      * @param leaseTime 上锁后自动释放锁时间
      * @param unit 时间颗粒度
@@ -73,7 +83,7 @@ public class RedisLock {
 
     /**
      * 加锁
-     * 
+     *
      * @param lockKey 锁实例key
      * @param waitTime 最多等待时间
      * @param leaseTime 上锁后自动释放锁时间
@@ -93,7 +103,7 @@ public class RedisLock {
 
     /**
      * 释放锁
-     * 
+     *
      * @param lockKey 锁实例key
      */
     public static void unlock(String lockKey) {
@@ -103,7 +113,7 @@ public class RedisLock {
 
     /**
      * 释放锁
-     * 
+     *
      * @param lock 锁信息
      */
     public static void unlock(RLock lock) {
