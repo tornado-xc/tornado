@@ -9,12 +9,6 @@ import java.util.concurrent.TimeUnit;
 public class RedisLock {
     private static RedissonClient redissonClient;
 
-    /**
-     * 初始化
-     *
-     * @param redissonClient        redisson客户端
-     * @param isRefresh             是否刷新，如果为true会使用传入的不为空就会刷新原有的值
-     */
     public static void init(RedissonClient redissonClient, boolean isRefresh) {
         if (redissonClient != null && (isRefresh || RedisLock.redissonClient == null)) {
             RedisLock.redissonClient = redissonClient;
