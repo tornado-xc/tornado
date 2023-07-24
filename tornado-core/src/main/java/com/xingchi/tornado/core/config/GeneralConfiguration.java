@@ -50,8 +50,8 @@ public class GeneralConfiguration {
             sentinelServersConfig
                     .setMasterName(sentinel.getMaster())
                     .setSentinelAddresses(nodes);
-            if (StringUtils.hasText(redisProperties.getPassword())) {
-                sentinelServersConfig.setPassword(redisProperties.getPassword());
+            if (StringUtils.hasText(sentinel.getPassword())) {
+                sentinelServersConfig.setPassword(sentinel.getPassword());
             }
         } else if (cluster != null && !CollectionUtils.isEmpty(cluster.getNodes())) {
             // 集群模式配置

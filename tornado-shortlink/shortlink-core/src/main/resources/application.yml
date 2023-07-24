@@ -10,7 +10,7 @@ spring:
         - 150.158.130.171:57001
         - 150.158.130.171:57002
         - 150.158.130.171:57003
-      password: xy19981123..
+    password: xy19981123..
 #    host: ${REDIS.HOST:150.158.130.171}
 #    port: ${REDIS.PORT:56379}
 #    password: ${REDIS.PASSWORD:xy19981123..}
