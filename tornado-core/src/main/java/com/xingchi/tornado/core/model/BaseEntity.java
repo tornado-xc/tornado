@@ -25,22 +25,22 @@ public abstract class BaseEntity<T> implements Serializable {
     @AutoId
     @TableId(value = "id", type = IdType.INPUT)
     @TableField(fill = FieldFill.INSERT)
-    private T id;
+    protected T id;
 
     @TableField(fill = FieldFill.INSERT)
-    private T createBy;
+    protected T createBy;
 
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    protected LocalDateTime createTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private T updateBy;
+    protected T updateBy;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
+    protected LocalDateTime updateTime;
 
     @TableLogic
     @TableField(select = false)
-    private Integer deleted;
+    protected Integer deleted;
 
 }
