@@ -83,6 +83,7 @@ public class IDGeneratorServiceImpl implements IDGeneratorService, InitializingB
 
     @Override
     public List<Long> redisIds(Integer count) {
+
         return redisIdProvider.nextIds(count);
     }
 
