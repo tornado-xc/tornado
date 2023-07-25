@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -66,8 +67,7 @@ public class RedisIdProvider implements IDProvider<Long> {
     public Long nextId() {
         // 获取当前时间，并计算当前时间与起始时间的差值
         LocalDateTime now = LocalDateTime.now();
-        long currentTime = now.toEpochSecond(ZoneOffset.UTC);
-        long timestamp = currentTime - TIME_EPOCH;
+        long timestamp = now.toEpochSecond(ZoneOffset.UTC) - TIME_EPOCH;
 
         if (timestamp < 0) {
             throw new RuntimeException("时钟回拨，请调整系统时间！");
@@ -91,23 +91,24 @@ public class RedisIdProvider implements IDProvider<Long> {
      * @return      redisid
      */
     @Override
+    @SuppressWarnings("unchecked")
     public List<Long> nextIds(Integer count) {
 
         // 获取当前时间，并计算当前时间与起始时间的差值
         LocalDateTime now = LocalDateTime.now();
-        long currentTime = now.toEpochSecond(ZoneOffset.UTC);
-        long timestamp = currentTime - TIME_EPOCH;
-
+        long timestamp = now.toEpochSecond(ZoneOffset.UTC) - TIME_EPOCH;
         if (timestamp < 0) {
             throw new RuntimeException("时钟回拨，请调整系统时间！");
         }
 
-        // 根据时间进行区分
         String date = now.format(DateTimeFormatter.ofPattern(FORMAT));
 
         List<Long> ids = stringRedisTemplate.execute(BATCH_ID_SCRIPT,
                 Collections.singletonList("id:" + businessPrefix + ":" + date),
                 String.valueOf(step), String.valueOf(count));
+        if (CollectionUtils.isEmpty(ids)) {
+            ids = Collections.emptyList();
+        }
         return ids.stream().map(item -> timestamp << SEQUENCE_BITS | item).collect(Collectors.toList());
     }
 }
