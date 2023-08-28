@@ -1,0 +1,27 @@
+version: "2"
+services:
+  nacos:
+    image: nacos/nacos-server
+    container_name: nacos-standalone
+    environment:
+      - JVM_XMS=512m
+      - JVM_XMX=512m
+      - JVM_XMN=256m
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=150.158.130.171
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_PORT=53306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=xy19981123..
+      - NACOS_AUTH_ENABLE=true
+      - SERVER_SERVLET_CONTEXTPATH=/
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    volumes:
+      - /var/docker/nacos/standalone-logs:/home/nacos/logs
+      - /var/docker/nacos/conf/application.properties:/home/nacos/conf/application.properties
+    ports:
+      - "58848:8848"
+      - "59848:9848"
+    restart: on-failure

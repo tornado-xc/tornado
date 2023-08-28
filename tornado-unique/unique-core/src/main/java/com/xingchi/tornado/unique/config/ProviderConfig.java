@@ -1,6 +1,6 @@
 package com.xingchi.tornado.unique.config;
 
-import com.xingchi.tornado.unique.provider.impl.RedisProvider;
+import com.xingchi.tornado.unique.provider.impl.RedisIdProvider;
 import com.xingchi.tornado.unique.provider.impl.SnowflakeProvider;
 import com.xingchi.tornado.unique.provider.impl.UUIDProvider;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
@@ -23,11 +24,15 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 public class ProviderConfig {
 
     @Bean
-    @DependsOn("stringRedisTemplate")
+    @DependsOn({"stringRedisTemplate"})
     @ConditionalOnMissingBean
-    public RedisProvider redisIdFactory(StringRedisTemplate stringRedisTemplate, UniqueProperties uniqueProperties) {
+    public RedisIdProvider redisIdFactory(StringRedisTemplate stringRedisTemplate, UniqueProperties uniqueProperties) {
         UniqueProperties.RedisId redisId = uniqueProperties.getRedisId();
-        return new RedisProvider(stringRedisTemplate, StringUtils.isNotBlank(redisId.getBusinessPrefix()) ? redisId.getBusinessPrefix() : "default");
+        Integer step = redisId.getStep();
+        if (step == null || step <= 0) {
+            step = 1;
+        }
+        return new RedisIdProvider(stringRedisTemplate, StringUtils.isNotBlank(redisId.getBusinessPrefix()) ? redisId.getBusinessPrefix() : "default", step);
     }
 
     @Bean

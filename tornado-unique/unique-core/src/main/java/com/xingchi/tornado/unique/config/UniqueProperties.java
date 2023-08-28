@@ -26,6 +26,7 @@ public class UniqueProperties {
     @Data
     public static class RedisId {
         private String businessPrefix = "default";
+        private Integer step = 1;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.xingchi.tornado.basic;
+package com.xingchi.tornado.core.model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;

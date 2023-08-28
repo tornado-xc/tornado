@@ -1,6 +1,7 @@
 package com.xingchi.tornado.sms.service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.xingchi.tornado.core.context.IdContextHolder;
 import com.xingchi.tornado.core.context.SpringContextHolder;
 import com.xingchi.tornado.sms.common.enums.OperateStatus;
 import com.xingchi.tornado.sms.event.SmsSendEvent;
@@ -55,6 +56,7 @@ public abstract class AbstractSmsService implements SmsService {
         record.setStatus(OperateStatus.SUCCESS.code());
         record.setCause("成功");
         record.setTemplateId(noteTemplate.getId());
+        record.setMessageId(IdContextHolder.get());
         record.setContent(this.fill(noteTemplate.getContent(), parameter));
         try {
             // 执行实际的发送操作，交由子类实现

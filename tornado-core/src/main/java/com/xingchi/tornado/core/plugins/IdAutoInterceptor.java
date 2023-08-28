@@ -2,6 +2,7 @@ package com.xingchi.tornado.core.plugins;
 
 import com.xingchi.tornado.core.context.IdContextHolder;
 import com.xingchi.tornado.core.plugins.anno.AutoId;
+import com.xingchi.tornado.unique.common.IDProviderType;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;

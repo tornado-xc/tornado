@@ -17,6 +17,7 @@ public enum IDProviderType {
     SNOWFLAKE,
     REDIS,
     UUID,
+    SIMPLE,
     ;
 
     public static IDProviderType getInstance(String name) {

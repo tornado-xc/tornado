@@ -23,6 +23,9 @@
         <module>tornado-shortlink/shortlink-common</module>
         <module>tornado-shortlink/shortlink-core</module>
         <module>tornado-mybatis-plus</module>
+        <module>tornado-captcha/captcha-common</module>
+        <module>tornado-captcha/captcha-client</module>
+        <module>tornado-captcha/captcha-core</module>
     </modules>
 
     <properties>
@@ -38,6 +41,9 @@
         <mybatis.plus.verison>3.5.3.1</mybatis.plus.verison>
         <springdoc.version>1.6.15</springdoc.version>
         <swagger.annotations.version>2.2.8</swagger.annotations.version>
+        <fastjson.version>2.0.25</fastjson.version>
+        <guava.version>31.1-jre</guava.version>
+        <redisson.version>3.18.0</redisson.version>
     </properties>
 
     <dependencyManagement>
@@ -74,7 +80,34 @@
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.annotations.version}</version>
-                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis.plus.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis.plus.verison}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

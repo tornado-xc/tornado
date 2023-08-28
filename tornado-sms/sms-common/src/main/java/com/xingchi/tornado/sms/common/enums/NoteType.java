@@ -13,6 +13,9 @@ import java.util.Arrays;
  */
 public enum NoteType implements BaseEnum {
 
+    /**
+     * 通知类型
+     */
     CODE(1, "验证码"),
     NOTICE(2, "通知"),
     OTHER(3, "其他"),

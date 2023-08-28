@@ -34,7 +34,6 @@ public interface TreeNode<T extends Serializable, M> {
      * 设置父节点id
      *
      * @param parentId 父节点id
-     * @return 父节点id
      */
     void setParentId(T parentId);
 

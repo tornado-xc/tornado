@@ -4,7 +4,7 @@ package com.xingchi.tornado.unique.service.impl;
 import com.xingchi.tornado.unique.common.IDProviderType;
 import com.xingchi.tornado.constant.Constants;
 import com.xingchi.tornado.unique.provider.IDProvider;
-import com.xingchi.tornado.unique.provider.impl.RedisProvider;
+import com.xingchi.tornado.unique.provider.impl.RedisIdProvider;
 import com.xingchi.tornado.unique.provider.impl.SnowflakeProvider;
 import com.xingchi.tornado.unique.provider.impl.UUIDProvider;
 import com.xingchi.tornado.unique.service.IDGeneratorService;
@@ -32,7 +32,7 @@ public class IDGeneratorServiceImpl implements IDGeneratorService, InitializingB
     /**
      * redis id生成器
      */
-    private final RedisProvider redisProvider;
+    private final RedisIdProvider redisIdProvider;
 
     /**
      * 雪花id生成器
@@ -49,8 +49,8 @@ public class IDGeneratorServiceImpl implements IDGeneratorService, InitializingB
     Map<String, IDProvider> providerMappings = new ConcurrentHashMap<>(Constants.INIT_CAPACITY);
 
     @Autowired
-    public IDGeneratorServiceImpl(RedisProvider redisProvider, SnowflakeProvider snowflakeProvider, UUIDProvider uuidProvider, ApplicationContext context) {
-        this.redisProvider = redisProvider;
+    public IDGeneratorServiceImpl(RedisIdProvider redisIdProvider, SnowflakeProvider snowflakeProvider, UUIDProvider uuidProvider, ApplicationContext context) {
+        this.redisIdProvider = redisIdProvider;
         this.snowflakeProvider = snowflakeProvider;
         this.uuidProvider = uuidProvider;
         this.context = context;
@@ -78,12 +78,13 @@ public class IDGeneratorServiceImpl implements IDGeneratorService, InitializingB
 
     @Override
     public Long redisId() {
-        return redisProvider.nextId();
+        return redisIdProvider.nextId();
     }
 
     @Override
     public List<Long> redisIds(Integer count) {
-        return redisProvider.nextIds(count);
+
+        return redisIdProvider.nextIds(count);
     }
 
     @Override

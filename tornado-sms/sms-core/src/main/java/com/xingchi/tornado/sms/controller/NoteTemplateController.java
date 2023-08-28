@@ -4,9 +4,8 @@ import com.xingchi.tornado.core.validation.Create;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateDTO;
 import com.xingchi.tornado.sms.common.model.dto.NoteTemplateQuery;
 import com.xingchi.tornado.sms.common.model.vo.NoteTemplateVO;
-import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
-import com.xingchi.tornado.basic.PageResult;
+import com.xingchi.tornado.core.model.PageResult;
 import com.xingchi.tornado.basic.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
