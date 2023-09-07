@@ -19,13 +19,7 @@
         <module>tornado-file</module>
         <module>tornado-captcha</module>
         <module>tornado-workflow</module>
-        <module>tornado-shortlink/shortlink-client</module>
-        <module>tornado-shortlink/shortlink-common</module>
-        <module>tornado-shortlink/shortlink-core</module>
         <module>tornado-mybatis-plus</module>
-        <module>tornado-captcha/captcha-common</module>
-        <module>tornado-captcha/captcha-client</module>
-        <module>tornado-captcha/captcha-core</module>
     </modules>
 
     <properties>
