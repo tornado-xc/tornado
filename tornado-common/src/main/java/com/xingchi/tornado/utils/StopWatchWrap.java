@@ -2,6 +2,7 @@ package com.xingchi.tornado.utils;
 
 import org.springframework.lang.NonNull;
 import org.springframework.util.StopWatch;
+import org.springframework.util.StringUtils;
 
 import java.text.NumberFormat;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,8 @@ public class StopWatchWrap extends StopWatch {
     @Override
     @NonNull
     public String shortSummary() {
-        return "StopWatch '" + getId() + "': running time = " + this.getTotalTime() + " " + this.getUnitString();
+        String prefix = StringUtils.hasText(summary) ? summary : "StopWatch '";
+        return prefix + getId() + "': running time = " + this.getTotalTime() + " " + this.getUnitString();
     }
 
     @Override
