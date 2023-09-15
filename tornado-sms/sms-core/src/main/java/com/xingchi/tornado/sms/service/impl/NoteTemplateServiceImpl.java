@@ -13,7 +13,7 @@ import com.xingchi.tornado.sms.dao.NoteTemplateDao;
 import com.xingchi.tornado.sms.exception.BuilderNotePlatformClientException;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
-import com.xingchi.tornado.utils.BeanCopyUtils;
+import com.xingchi.tornado.utils.BeanUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -40,14 +40,14 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
         if (CollectionUtils.isEmpty(noteTemplates)) {
             return Collections.emptyList();
         }
-        return BeanCopyUtils.copyList(noteTemplates, NoteTemplateVO.class);
+        return BeanUtils.copyList(noteTemplates, NoteTemplateVO.class);
     }
 
     @Override
     public NoteTemplateVO selectById(Long id) {
         NoteTemplate noteTemplate = noteTemplateDao.selectById(id);
         Assert.notNull(noteTemplate, "短信模板不存在");
-        return BeanCopyUtils.copyProperties(noteTemplate, NoteTemplateVO.class);
+        return BeanUtils.copyProperties(noteTemplate, NoteTemplateVO.class);
     }
 
     @Override
@@ -55,13 +55,13 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
 
         NoteTemplate noteTemplate = noteTemplateDao.selectOne(Wrappers.<NoteTemplate>lambdaQuery().eq(NoteTemplate::getBusinessType, businessType));
         Assert.notNull(noteTemplate, String.format("指定业务类型的消息模板不存在'%s'", businessType));
-        return BeanCopyUtils.copyProperties(noteTemplate, NoteTemplateVO.class);
+        return BeanUtils.copyProperties(noteTemplate, NoteTemplateVO.class);
     }
 
     @Override
     public PageResult<NoteTemplateVO> pageList(NoteTemplateQuery query) {
         Page<NoteTemplate> noteTemplatePage = this.page(new Page<>(query.getPageNum(), query.getPageSize()), null);
-        return PageResult.fetchPage(noteTemplatePage, f -> BeanCopyUtils.copyProperties(f, NoteTemplateVO.class));
+        return PageResult.fetchPage(noteTemplatePage, f -> BeanUtils.copyProperties(f, NoteTemplateVO.class));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
 
         noteTemplateDTO.setPlatform(platform);
         noteTemplateDTO.setType(type);
-        return this.save(BeanCopyUtils.copyProperties(noteTemplateDTO, NoteTemplate.class));
+        return this.save(BeanUtils.copyProperties(noteTemplateDTO, NoteTemplate.class));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class NoteTemplateServiceImpl extends ServiceImpl<NoteTemplateDao, NoteTe
         NoteTemplate noteTemplate = this.baseMapper.selectById(id);
         Assert.notNull(noteTemplate, String.format("短信模板%s不存在", id));
 
-        NoteTemplate template = BeanCopyUtils.copyProperties(noteTemplateDTO, NoteTemplate.class);
+        NoteTemplate template = BeanUtils.copyProperties(noteTemplateDTO, NoteTemplate.class);
         template.setId(id);
         return this.updateById(template);
     }

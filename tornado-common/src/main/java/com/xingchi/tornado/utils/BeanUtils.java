@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author xiaoya
  */
-public class BeanCopyUtils {
+public class BeanUtils {
 
     /**
      * BeanCopier 的缓存

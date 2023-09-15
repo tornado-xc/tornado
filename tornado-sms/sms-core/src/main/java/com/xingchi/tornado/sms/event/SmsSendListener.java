@@ -3,7 +3,7 @@ package com.xingchi.tornado.sms.event;
 import com.xingchi.tornado.constant.Separator;
 import com.xingchi.tornado.sms.model.NoteLogRecord;
 import com.xingchi.tornado.sms.service.NoteLogService;
-import com.xingchi.tornado.utils.BeanCopyUtils;
+import com.xingchi.tornado.utils.BeanUtils;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.event.EventListener;
@@ -42,7 +42,7 @@ public class SmsSendListener {
         List<NoteLogRecord> records = new ArrayList<>();
         for (String signAccount : accounts) {
 
-            NoteLogRecord signRecord = BeanCopyUtils.copyProperties(record, NoteLogRecord.class);
+            NoteLogRecord signRecord = BeanUtils.copyProperties(record, NoteLogRecord.class);
             signRecord.setAccount(signAccount);
             records.add(signRecord);
         }
