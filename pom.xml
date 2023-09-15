@@ -38,6 +38,7 @@
         <fastjson.version>2.0.25</fastjson.version>
         <guava.version>31.1-jre</guava.version>
         <redisson.version>3.18.0</redisson.version>
+        <zxing.version>3.4.1</zxing.version>
     </properties>
 
     <dependencyManagement>
@@ -102,6 +103,18 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis.plus.verison}</version>
+            </dependency>
+
+            <!-- 二维码工具相关 -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
