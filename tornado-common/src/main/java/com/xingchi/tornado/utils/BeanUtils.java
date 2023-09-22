@@ -39,6 +39,7 @@ public class BeanUtils {
      * @param source     源对象
      * @param targetType 目标对象
      */
+    @SuppressWarnings("deprecation")
     public static <T> T copyProperties(Object source, Class<T> targetType) {
         if (source == null || targetType == null) {
             return null;

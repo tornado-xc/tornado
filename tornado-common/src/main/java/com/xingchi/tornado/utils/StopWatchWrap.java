@@ -142,24 +142,4 @@ public class StopWatchWrap extends StopWatch {
         return result;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        StopWatch stopWatch = new StopWatchWrap("测试一下", WatchTimeUnit.NANOSECONDS);
-
-        stopWatch.start("第一个");
-        TimeUnit.MILLISECONDS.sleep(1002);
-        stopWatch.stop();
-
-        stopWatch.start("第二个");
-        TimeUnit.MILLISECONDS.sleep(234);
-        stopWatch.stop();
-
-        stopWatch.start("第三个");
-        TimeUnit.MILLISECONDS.sleep(223);
-        stopWatch.stop();
-        System.out.println(stopWatch.prettyPrint());
-
-    }
-
-
-
 }
