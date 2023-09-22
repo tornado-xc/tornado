@@ -64,7 +64,7 @@ public class NoteTemplateController {
 
     @PostMapping
     @Operation(summary = "新增一个短信模板", description = "创建一个新的短信模板")
-    public Result<Boolean> createNoteTemplate(@RequestBody @Validated(value = Create.class) NoteTemplateDTO noteTemplateDTO) {
+    public Result<Boolean> createNoteTemplate(@RequestBody @Validated NoteTemplateDTO noteTemplateDTO) {
         return Result.ok(noteTemplateService.create(noteTemplateDTO));
     }
 
