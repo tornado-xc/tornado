@@ -3,6 +3,7 @@ package com.xingchi.tornado.mybatisplus.plugins;
 import com.xingchi.tornado.constant.DateTimeFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ParameterMapping;
@@ -49,6 +50,10 @@ public class SqlLogInterceptor implements Interceptor {
 
     private static final Logger log = LoggerFactory.getLogger(SqlLogInterceptor.class);
 
+    private static final String PROXY_MAPPED_STATEMENT_ATTR = "h.target.delegate.mappedStatement";
+    private static final String PROXY_CONFIGURATION_ATTR = "h.target.delegate.configuration";
+    private static final String CONFIGURATION_ATTR = "delegate.configuration";
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
 
@@ -67,13 +72,14 @@ public class SqlLogInterceptor implements Interceptor {
             long end = System.currentTimeMillis();
             String sql;
             if (Proxy.isProxyClass(statementHandler.getClass())) {
-                MappedStatement mappedStatement = (MappedStatement) metaObject.getValue("h.target.delegate.mappedStatement");
-                Configuration configuration = (Configuration) metaObject.getValue("h.target.delegate.configuration");
+                MappedStatement mappedStatement = (MappedStatement) metaObject.getValue(PROXY_MAPPED_STATEMENT_ATTR);
+                Configuration configuration = (Configuration) metaObject.getValue(PROXY_CONFIGURATION_ATTR);
                 sql = this.getSql(boundSql, configuration);
             } else {
-                Configuration configuration = (Configuration) metaObject.getValue("delegate.configuration");
+                Configuration configuration = (Configuration) metaObject.getValue(CONFIGURATION_ATTR);
                 sql = this.getSql(boundSql, configuration);
             }
+
 
             // 获取SQL
             if (log.isDebugEnabled()) {
@@ -98,7 +104,7 @@ public class SqlLogInterceptor implements Interceptor {
         if (StringUtils.isBlank(sql)) {
             throw new SQLException("运行sql不能为空");
         }
-        sql = this.beautifySql(sql);
+        sql = this.cleanSql(sql);
 
         // 获取参数传递过来的值
         Object parameterObject = boundSql.getParameterObject();
@@ -158,13 +164,20 @@ public class SqlLogInterceptor implements Interceptor {
         return sql;
     }
 
-    private String beautifySql(String sql) {
-        return sql.replaceAll("[\\s\n]+", " ");
-    }
+    public String cleanSql(String sql) {
+        // 去除 SQL 注释
+        sql = sql.replaceAll("/\\*.*?\\*/", "");
 
-    @Override
-    public Object plugin(Object target) {
-        return Plugin.wrap(target, this);
+        // 去除行注释
+        sql = sql.replaceAll("--[^\n]*", "");
+
+        // 去除多余的空格和换行符
+        sql = sql.replaceAll("[\\s]+", " ");
+
+        // 去除语句开头和结尾的空格
+        sql = sql.trim();
+
+        return sql;
     }
 
     @Override
