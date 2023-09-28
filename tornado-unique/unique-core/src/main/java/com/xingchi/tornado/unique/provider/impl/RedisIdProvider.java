@@ -107,7 +107,7 @@ public class RedisIdProvider implements IDProvider<Long> {
                 Collections.singletonList("id:" + businessPrefix + ":" + date),
                 String.valueOf(step), String.valueOf(count));
         if (CollectionUtils.isEmpty(ids)) {
-            ids = Collections.emptyList();
+            return Collections.emptyList();
         }
         return ids.stream().map(item -> timestamp << SEQUENCE_BITS | item).collect(Collectors.toList());
     }

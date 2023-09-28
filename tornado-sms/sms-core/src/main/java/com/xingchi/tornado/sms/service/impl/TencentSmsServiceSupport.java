@@ -58,7 +58,6 @@ public class TencentSmsServiceSupport extends AbstractSmsService {
         } catch (TencentCloudSDKException e) {
             log.error("Send SMS fail. cause: {}", e.getMessage());
             ExceptionWrap.cast(e.getMessage());
-            throw new RuntimeException(e);
         }
         return true;
     }
