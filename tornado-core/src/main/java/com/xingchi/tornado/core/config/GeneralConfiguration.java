@@ -35,6 +35,8 @@ import java.util.stream.Collectors;
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class GeneralConfiguration {
 
+    public static final String REDIS_PROTOCOL_PREFIX = "redis://";
+
     @Bean
     @ConditionalOnBean(RedisProperties.class)
     @ConditionalOnMissingBean(RedissonClient.class)
@@ -43,9 +45,10 @@ public class GeneralConfiguration {
 
         RedisProperties.Sentinel sentinel = redisProperties.getSentinel();
         RedisProperties.Cluster cluster = redisProperties.getCluster();
+
         if (sentinel != null && !CollectionUtils.isEmpty(sentinel.getNodes())) {
             // 哨兵模式配置
-            List<String> nodes = sentinel.getNodes().stream().map(address -> "redis://" + address).collect(Collectors.toList());
+            List<String> nodes = sentinel.getNodes().stream().map(address -> REDIS_PROTOCOL_PREFIX + address).collect(Collectors.toList());
             SentinelServersConfig sentinelServersConfig = config.useSentinelServers();
             sentinelServersConfig
                     .setMasterName(sentinel.getMaster())
@@ -55,7 +58,7 @@ public class GeneralConfiguration {
             }
         } else if (cluster != null && !CollectionUtils.isEmpty(cluster.getNodes())) {
             // 集群模式配置
-            List<String> nodes = cluster.getNodes().stream().map(address -> "redis://" + address).collect(Collectors.toList());
+            List<String> nodes = cluster.getNodes().stream().map(address -> REDIS_PROTOCOL_PREFIX + address).collect(Collectors.toList());
             ClusterServersConfig clusterServersConfig = config.useClusterServers();
             clusterServersConfig.setNodeAddresses(nodes);
             if (StringUtils.hasText(redisProperties.getPassword())) {
@@ -65,7 +68,7 @@ public class GeneralConfiguration {
             // 单机
             SingleServerConfig singleServerConfig = config.useSingleServer();
             singleServerConfig
-                    .setAddress("redis://" + redisProperties.getHost() + ":" + redisProperties.getPort())
+                    .setAddress(REDIS_PROTOCOL_PREFIX + redisProperties.getHost() + ":" + redisProperties.getPort())
                     .setDatabase(redisProperties.getDatabase());
             if (StringUtils.hasText(redisProperties.getPassword())) {
                 singleServerConfig.setPassword(redisProperties.getPassword());
