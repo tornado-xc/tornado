@@ -20,6 +20,7 @@
         <module>tornado-captcha</module>
         <module>tornado-workflow</module>
         <module>tornado-mybatis-plus</module>
+        <module>tornado-springdoc</module>
     </modules>
 
     <properties>
@@ -68,7 +69,6 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc.version}</version>
-                <scope>import</scope>
             </dependency>
 
             <dependency>
