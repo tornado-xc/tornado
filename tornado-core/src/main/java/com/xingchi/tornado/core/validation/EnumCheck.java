@@ -1,7 +1,6 @@
 package com.xingchi.tornado.core.validation;
 
 import com.xingchi.tornado.basic.BaseEnum;
-import org.springframework.lang.NonNull;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

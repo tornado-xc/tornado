@@ -19,10 +19,8 @@
         <module>tornado-file</module>
         <module>tornado-captcha</module>
         <module>tornado-workflow</module>
-        <module>tornado-shortlink/shortlink-client</module>
-        <module>tornado-shortlink/shortlink-common</module>
-        <module>tornado-shortlink/shortlink-core</module>
         <module>tornado-mybatis-plus</module>
+        <module>tornado-springdoc</module>
     </modules>
 
     <properties>
@@ -38,6 +36,10 @@
         <mybatis.plus.verison>3.5.3.1</mybatis.plus.verison>
         <springdoc.version>1.6.15</springdoc.version>
         <swagger.annotations.version>2.2.8</swagger.annotations.version>
+        <fastjson.version>2.0.25</fastjson.version>
+        <guava.version>31.1-jre</guava.version>
+        <redisson.version>3.18.0</redisson.version>
+        <zxing.version>3.4.1</zxing.version>
     </properties>
 
     <dependencyManagement>
@@ -67,14 +69,52 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc.version}</version>
-                <scope>import</scope>
             </dependency>
 
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.annotations.version}</version>
-                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis.plus.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis.plus.verison}</version>
+            </dependency>
+
+            <!-- 二维码工具相关 -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

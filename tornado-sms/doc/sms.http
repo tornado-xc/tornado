@@ -17,9 +17,9 @@ Content-Type: application/json
 {
   "code": "3D3434",
   "content": "测试添加模板",
-  "businessType": "134212341233333",
+  "businessType": "测试测试测试啊",
   "signName": "tornado",
-  "type": 1,
+  "type": 33,
   "platform": 1,
   "description": "嘎对方告诉对方"
 }
@@ -44,7 +44,7 @@ Content-Type: application/json
   "templateCode": "NEW_NOTE_TEST",
   "account": "15285828344",
   "parameter": {
-    "code": 102342
+    "code": 102354
   }
 }
 

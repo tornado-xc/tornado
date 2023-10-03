@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author xiaoya
  */
-public class BeanCopyUtils {
+public class BeanUtils {
 
     /**
      * BeanCopier 的缓存
@@ -39,6 +39,7 @@ public class BeanCopyUtils {
      * @param source     源对象
      * @param targetType 目标对象
      */
+    @SuppressWarnings("deprecation")
     public static <T> T copyProperties(Object source, Class<T> targetType) {
         if (source == null || targetType == null) {
             return null;

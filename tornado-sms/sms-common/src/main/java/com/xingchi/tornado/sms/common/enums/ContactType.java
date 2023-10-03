@@ -13,6 +13,9 @@ import java.util.Arrays;
  */
 public enum ContactType implements BaseEnum {
 
+    /**
+     * 联系方式类型
+     */
     MOBILE(1, "手机"),
     EMAIL(2, "邮箱"),
     ;

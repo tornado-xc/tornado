@@ -9,6 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <packaging>pom</packaging>
+    <modules>
+        <module>captcha-common</module>
+        <module>captcha-client</module>
+        <module>captcha-core</module>
+    </modules>
+
+
     <artifactId>tornado-captcha</artifactId>
 
     <properties>
