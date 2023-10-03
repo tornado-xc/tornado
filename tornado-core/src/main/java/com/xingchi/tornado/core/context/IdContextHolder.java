@@ -20,13 +20,9 @@ import java.util.stream.Collectors;
  */
 public class IdContextHolder {
 
-    private static final ThreadLocal<BlockingQueue<Long>> CONTEXT = ThreadLocal.withInitial(() -> new ArrayBlockingQueue<>(100));
+    private static final ThreadLocal<BlockingQueue<Long>> CONTEXT = ThreadLocal.withInitial(() -> new ArrayBlockingQueue<>(10));
 
     private static UniqueCodeClient uniqueCodeClient;
-
-    public static void setUniqueCodeClient(UniqueCodeClient uniqueCodeClient) {
-        IdContextHolder.uniqueCodeClient = uniqueCodeClient;
-    }
 
     public static void set(Long id) {
         if (id == null) {
@@ -47,13 +43,20 @@ public class IdContextHolder {
         try {
             BlockingQueue<Long> queue = CONTEXT.get();
             if (queue.size() == 0) {
-                List<Long> list = uniqueCodeClient.snowflakeIds(10);
+                List<Long> list = getUniqueCodeClient().snowflakeIds(10);
                 CONTEXT.get().addAll(list);
             }
             return CONTEXT.get().take();
         } catch (Exception e) {
             throw new IllegalArgumentException("获取id失败");
         }
+    }
+
+    private static UniqueCodeClient getUniqueCodeClient() {
+        if (uniqueCodeClient == null) {
+            uniqueCodeClient = SpringContextHolder.getBean(UniqueCodeClient.class);
+        }
+        return uniqueCodeClient;
     }
 
     public static void remove() {
