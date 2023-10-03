@@ -24,6 +24,10 @@ public class StopWatchWrap extends StopWatch {
      */
     private final String summary;
 
+    public StopWatchWrap() {
+        this(WatchTimeUnit.MILLISECONDS);
+    }
+
     public StopWatchWrap(WatchTimeUnit unit) {
         this("", unit);
     }
