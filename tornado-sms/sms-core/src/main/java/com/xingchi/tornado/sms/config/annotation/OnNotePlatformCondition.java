@@ -1,7 +1,7 @@
 package com.xingchi.tornado.sms.config.annotation;
 
 import com.xingchi.tornado.sms.common.enums.PlatformType;
-import com.xingchi.tornado.sms.config.NoteProperties;
+import com.xingchi.tornado.sms.config.model.NoteProperties;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.annotation.MergedAnnotation;

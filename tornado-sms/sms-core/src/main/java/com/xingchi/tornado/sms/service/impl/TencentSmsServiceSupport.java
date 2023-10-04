@@ -9,7 +9,7 @@ import com.xingchi.tornado.basic.BaseParameter;
 import com.xingchi.tornado.constant.Separator;
 import com.xingchi.tornado.core.exception.ExceptionWrap;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
-import com.xingchi.tornado.sms.config.NoteProperties;
+import com.xingchi.tornado.sms.config.model.NoteProperties;
 import com.xingchi.tornado.sms.model.NoteTemplate;
 import com.xingchi.tornado.sms.service.AbstractSmsService;
 import com.xingchi.tornado.sms.service.NoteTemplateService;

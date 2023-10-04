@@ -44,3 +44,12 @@ xingchi:
         access-id: LTAI5tLxUGn4k8HQLQThtw7m
         access-secret: TgFzbJcrcIPGVfiVIXBFxKY0xHokFv
       platform-type: aliyun
+      email:
+        debug: true
+        host: smtp.qq.com
+        port: 587
+        username: xingchi.xy@qq.com
+        password: sxeuilabfzfbchic
+        ssl: true
+
+
