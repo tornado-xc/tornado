@@ -25,6 +25,11 @@ public enum PlatformType implements BaseEnum {
     TENCENT(2, "腾讯云"),
 
     /**
+     * 邮箱
+     */
+    EMAIL(3, "邮箱"),
+
+    /**
      * 其他
      */
     OTHER(10, "其他"),

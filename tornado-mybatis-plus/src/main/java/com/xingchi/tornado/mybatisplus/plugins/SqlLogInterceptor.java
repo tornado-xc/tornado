@@ -160,6 +160,7 @@ public class SqlLogInterceptor implements Interceptor {
             handler = Objects.nonNull(parameterObject) ? parameterObject.toString() : "'NULL'";
         }
 
+        handler = handler.replaceAll("\\?", "%3F");
         sql = sql.replaceFirst("\\?", handler);
         return sql;
     }

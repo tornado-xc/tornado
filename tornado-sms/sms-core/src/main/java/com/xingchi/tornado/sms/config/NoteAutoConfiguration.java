@@ -7,14 +7,17 @@ import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.xingchi.tornado.sms.common.enums.PlatformType;
 import com.xingchi.tornado.sms.config.annotation.ConditionalOnNotePlatform;
+import com.xingchi.tornado.sms.config.model.NoteProperties;
 import com.xingchi.tornado.sms.exception.BuilderNotePlatformClientException;
 import com.xingchi.tornado.sms.service.SmsService;
 import com.xingchi.tornado.sms.service.NoteTemplateService;
 import com.xingchi.tornado.sms.service.impl.AliyunSmsServiceSupport;
 import com.xingchi.tornado.sms.service.impl.DefaultNoteServiceSupport;
+import com.xingchi.tornado.sms.service.impl.EmailServiceSupport;
 import com.xingchi.tornado.sms.service.impl.TencentSmsServiceSupport;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,6 +38,9 @@ import java.security.AccessControlException;
 @MapperScan("com.xingchi.framework.note.dao")
 @EnableConfigurationProperties({NoteProperties.class})
 public class NoteAutoConfiguration {
+
+    @Autowired
+    private NoteProperties noteProperties;
 
     @Bean
     @ConditionalOnClass(Client.class)
@@ -92,6 +98,12 @@ public class NoteAutoConfiguration {
     @ConditionalOnNotePlatform(value = PlatformType.TENCENT)
     public SmsService tencentSmsServiceSupport(SmsClient smsClient, NoteTemplateService noteTemplateService, NoteProperties noteProperties) {
         return new TencentSmsServiceSupport(smsClient, noteTemplateService, noteProperties);
+    }
+
+    @Bean
+    @ConditionalOnNotePlatform(value = PlatformType.EMAIL)
+    public SmsService emailNoteService(NoteTemplateService noteTemplateService) {
+        return new EmailServiceSupport(noteTemplateService, noteProperties.getEmail());
     }
 
     @Bean

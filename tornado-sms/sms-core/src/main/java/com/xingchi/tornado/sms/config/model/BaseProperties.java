@@ -1,4 +1,4 @@
-package com.xingchi.tornado.sms.config;
+package com.xingchi.tornado.sms.config.model;
 
 import lombok.Data;
 

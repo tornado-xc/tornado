@@ -91,4 +91,16 @@ public interface SmsService {
         });
     }
 
+    /**
+     * 填充模板内容
+     *
+     * @param content       原始模板
+     * @param parameter     参数内容
+     * @param signName      签名
+     * @return              替换后的结果
+     */
+    default String fill(String content, String signName, BaseParameter parameter) {
+        return String.format("【%s】%s", signName, this.fill(content, parameter));
+    }
+
 }

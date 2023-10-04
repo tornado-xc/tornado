@@ -1,4 +1,4 @@
-package com.xingchi.tornado.sms.config;
+package com.xingchi.tornado.sms.config.model;
 
 import com.xingchi.tornado.sms.common.enums.PlatformType;
 import lombok.Data;
@@ -36,6 +36,11 @@ public class NoteProperties {
      */
     private TencentCloudProperties tencentCloud;
 
+    /**
+     * 邮箱配置
+     */
+    private EmailProperties email;
+
     @Data
     @EqualsAndHashCode(callSuper = true)
     public static class AliyunProperties extends BaseProperties {
@@ -65,6 +70,18 @@ public class NoteProperties {
          * 地域节点
          */
         private String regionId = "ap-guangzhou";
+
+    }
+
+    @Data
+    public static class EmailProperties {
+
+        private String username;
+        private String password;
+        private String host;
+        private Integer port;
+        private Boolean ssl;
+        private Boolean debug;
 
     }
 
