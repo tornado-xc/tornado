@@ -55,4 +55,6 @@ class Org implements TreeNode<Long, Org> {
 
     private List<Org> children;
 
+    private boolean leaf;
+
 }
