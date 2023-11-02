@@ -1,0 +1,29 @@
+server:
+  port: 80
+spring:
+  application:
+    name: tornado-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: unique-server-route
+          # uri: http://lcalhost:55000
+          uri: lb://unique-server
+          predicates:
+            - Path=/unique/**
+#          filters:
+#            - RewritePath=/unique/?(?<segment>.*), /$\{segment}
+      discovery:
+        locator:
+          # 开启动态路由，前端可以通过 http://ip:port/服务名称/路由地址 的方式进行访问，由网关进行路由，需要从注册中心拉取服务地址
+          # 如：http://localhost:55000/uniquer-server/redis/10
+          enabled: true
+          # 开启动态路由后，将服务名称进行小写
+          lower-case-service-id: true
+    # 注册中心配置
+    nacos:
+      discovery:
+        server-addr: ${NACOS_DISCOVERY_URL:150.158.130.171:58848}
+        # 当容器化部署时使用的ip以及端口
+        # ip: ${NACOS_DISCOVERY_IP:150.158.130.171}
+        # port: ${NACOS_DISCOVERY_PORT:55000}
