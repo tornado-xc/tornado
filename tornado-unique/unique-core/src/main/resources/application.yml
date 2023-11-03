@@ -2,7 +2,7 @@ server:
   port: ${SERVER_PORT:55000}
 spring:
   application:
-    name: ${SPRING_APPLICATION_NAME:tornado-unique-server}
+    name: ${SPRING_APPLICATION_NAME:tornado-unique-service}
   redis:
     sentinel:
       master: mymaster

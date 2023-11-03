@@ -21,6 +21,7 @@
         <module>tornado-workflow</module>
         <module>tornado-mybatis-plus</module>
         <module>tornado-springdoc</module>
+        <module>tornado-gateway</module>
     </modules>
 
     <properties>
