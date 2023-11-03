@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "短信模板控制器", description = "包含短信模板相关的查询、修改、添加等相关接口")
-@RequestMapping("/template")
+@RequestMapping("/sms/template")
 public class NoteTemplateController {
 
     private final NoteTemplateService noteTemplateService;

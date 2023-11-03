@@ -2,6 +2,7 @@ package com.xingchi.tornado.sms.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xingchi.tornado.sms.model.NoteTemplate;
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
