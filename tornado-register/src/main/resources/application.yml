@@ -1,12 +1,32 @@
 server:
-  port: 58090
-
+  port: ${SERVER_PORT:58761}
 spring:
   application:
-    name: register-center
+    name: ${SPRING_APPLICATION_NAME:eureka-server}
+# eureka的配置分为 server、client、instance三种配置
 eureka:
+  server:
+    # 服务端间隔多少毫秒做定期剔除的操作，默认60s
+    eviction-interval-timer-in-ms: 10000
+    # 续约百分比，超过85%的应用没有和你续约，那么eureka会保护服务，不会剔除任何一个服务
+    renewal-percent-threshold: 0.85
+    # 开启自我保护机制
+    enable-self-preservation: true
   client:
+    # 是否注册到eureka上
+    register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}
+    # 是否拉取eureka上注册的服务列表到本地
+    fetch-registry: ${EUREKA_CLIENT_FETCH-REGISTRY:true}
     service-url:
-      defaultZone: http://localhost:58090/eureka
-    fetch-registry: false
-    register-with-eureka: false
+      # eureka服务器地址
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:58761/eureka}
+    # 拉取服务的时间间隔，时间越短脏读越少，性能消耗越大
+    registry-fetch-interval-seconds: 10
+  instance:
+    # 实例名称
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+    # 以ip的形式显示具体的服务信息
+    prefer-ip-address: true
+    hostname: localhost
+    # 服务实例的续约时间间隔，需要小于 eviction-interval-timer-in-ms 才有意义
+    lease-renewal-interval-in-seconds: 5
