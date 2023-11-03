@@ -3,6 +3,7 @@ package com.xingchi.tornado.core.config;
 import com.xingchi.tornado.core.context.SpringContextHolder;
 import com.xingchi.tornado.core.lock.RedisLock;
 import com.xingchi.tornado.core.plugins.IdAutoInterceptor;
+import com.xingchi.tornado.core.utils.BloomFilterUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.ClusterServersConfig;
@@ -77,9 +78,9 @@ public class GeneralConfiguration {
 
         RedissonClient redissonClient = Redisson.create(config);
         RedisLock.init(redissonClient, false);
+        BloomFilterUtils.setRedissonClient(redissonClient);
         return redissonClient;
     }
-
     @Bean
     @ConditionalOnMissingBean
     public SpringContextHolder springContextHolder() {
