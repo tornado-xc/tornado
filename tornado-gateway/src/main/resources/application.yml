@@ -8,7 +8,7 @@ spring:
       routes:
         - id: unique-server-route
           # uri: http://lcalhost:55000
-          uri: lb://unique-server
+          uri: lb://unique-service
           predicates:
             - Path=/unique/**
 #          filters:
