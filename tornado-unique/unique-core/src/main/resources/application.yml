@@ -27,3 +27,11 @@ spring:
 #    prefer-ip-address: true
 #    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
 #    hostname: localhost
+unique:
+  code:
+    snowflake:
+      datacenter-id: ${SNOWFLAKE_DATACENTER_ID:1}
+      work-id: ${SNOWFLAKE_WORK_ID:1}
+    redis-id:
+      step: ${REDIS_STEP:1}
+      business-prefix: ${REDIS_BUSINESS_PREFIX:default}
