@@ -1,8 +1,8 @@
 server:
-  port: ${SERVER.PORT:55000}
+  port: ${SERVER.PORT:56000}
 spring:
   application:
-    name: ${SPRING.APPLICATION.NAME:sms-server}
+    name: ${SPRING.APPLICATION.NAME:shortlink-server}
   redis:
     sentinel:
       master: mymaster
