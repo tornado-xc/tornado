@@ -1,0 +1,22 @@
+version: '3.2'
+services:
+  mongo:
+    image: mongo:7.0.4-rc0
+    restart: always
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /var/docker/mongodb/data:/data/db
+      - /var/docker/mongodb/logs:/var/log/mongodb
+    environment:
+      TZ: Asia/Shanghai
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+      wiredTigerCacheSizeGB: 2
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 2G

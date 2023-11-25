@@ -1,4 +1,4 @@
-version: "2.2"
+version: '3.2'
 services:
   gogs:
     image: gogs/gogs:latest
@@ -25,14 +25,14 @@ services:
       - MYSQL_ROOT_PASSWORD=xy19981123..
     restart: always
     privileged: true
-    
+
   nginx:
     image: nginx:latest
     container_name: gogs-nginx
     restart: always
     privileged: true
     environment:
-      - TZ=Asia/Shanghai 
+      - TZ=Asia/Shanghai
     ports:
       - "8080:80"
       - "80:80"
