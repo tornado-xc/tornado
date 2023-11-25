@@ -1,5 +1,6 @@
 package com.xingchi.tornado.shortlink.controller;
 
+import com.xingchi.tornado.basic.Result;
 import com.xingchi.tornado.shortlink.model.dto.ShortLinkCreateDTO;
 import com.xingchi.tornado.shortlink.service.ShortLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class ShortLinkController {
     private ShortLinkService shortLinkService;
 
     @PostMapping
-    public void storeLongUrl(@RequestBody ShortLinkCreateDTO shortLinkCreateDTO) {
-        shortLinkService.storeLongUrl(shortLinkCreateDTO);
+    public Result<String> storeLongUrl(@RequestBody ShortLinkCreateDTO shortLinkCreateDTO) {
+        return Result.ok(shortLinkService.storeLongUrl(shortLinkCreateDTO));
     }
 
 }

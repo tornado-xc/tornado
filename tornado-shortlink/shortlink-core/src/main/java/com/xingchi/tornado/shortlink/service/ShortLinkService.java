@@ -44,5 +44,5 @@ public interface ShortLinkService extends IService<ShortLink> {
      *
      * @param shortLinkCreateDTO 长链元数据信息
      */
-    void storeLongUrl(ShortLinkCreateDTO shortLinkCreateDTO);
+    String storeLongUrl(ShortLinkCreateDTO shortLinkCreateDTO);
 }

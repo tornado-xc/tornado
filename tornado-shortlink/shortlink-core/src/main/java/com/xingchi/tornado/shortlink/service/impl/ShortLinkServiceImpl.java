@@ -4,20 +4,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xingchi.tornado.constant.RegexConstants;
 import com.xingchi.tornado.core.context.IdContextHolder;
 import com.xingchi.tornado.core.exception.ExceptionWrap;
+import com.xingchi.tornado.shortlink.mapper.ShortLinkMapper;
 import com.xingchi.tornado.shortlink.model.ShortLink;
 import com.xingchi.tornado.shortlink.model.dto.ShortLinkCreateDTO;
 import com.xingchi.tornado.shortlink.service.ShortLinkService;
-import com.xingchi.tornado.shortlink.mapper.ShortLinkMapper;
 import com.xingchi.tornado.shortlink.service.ShortURLGenerateService;
-import com.xingchi.tornado.shortlink.service.ShortURLRedirectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.InstanceFilter;
 import org.springframework.util.StringUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 import static com.xingchi.tornado.shortlink.utils.Constants.DEFAULT_SERVICE_NAME;
 
@@ -71,7 +65,7 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
     }
 
     @Override
-    public void storeLongUrl(ShortLinkCreateDTO shortLinkCreateDTO) {
+    public String storeLongUrl(ShortLinkCreateDTO shortLinkCreateDTO) {
 
         String longUrl = shortLinkCreateDTO.getLongUrl();
         String shortId = shortURLGenerateService.generateShortURL(longUrl);
@@ -80,6 +74,9 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
         serviceName = StringUtils.hasText(serviceName) ? DEFAULT_SERVICE_NAME : serviceName;
 
         this.storeShortURLMapping(shortId, longUrl, serviceName);
+
+        // 返回短链id
+        return shortId;
     }
 }
 
