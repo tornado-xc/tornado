@@ -15,8 +15,8 @@ spring:
     nacos:
       discovery:
         server-addr: ${NACOS_DISCOVERY_URL:150.158.130.171:58848}
-        ip: ${NACOS_DISCOVERY_IP:150.158.130.171}
-        port: ${NACOS_DISCOVERY_PORT:55000}
+#        ip: ${NACOS_DISCOVERY_IP:150.158.130.171}
+#        port: ${NACOS_DISCOVERY_PORT:55000}
 #eureka:
 #  client:
 #    service-url:

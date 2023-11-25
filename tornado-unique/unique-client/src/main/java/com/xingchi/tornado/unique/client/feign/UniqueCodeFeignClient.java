@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2023/3/10 20:30
  * @modified xingchi
  */
-@FeignClient(value = "unique-service", path = "/unique")
+@FeignClient(value = "tornado-unique-service", path = "/unique")
 public interface UniqueCodeFeignClient {
 
     @GetMapping("/{type}")

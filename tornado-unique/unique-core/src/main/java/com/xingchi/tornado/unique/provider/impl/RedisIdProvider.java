@@ -41,7 +41,7 @@ public class RedisIdProvider implements IDProvider<Long> {
         BATCH_ID_SCRIPT.setResultType(List.class);
     }
 
-    public RedisIdProvider(StringRedisTemplate stringRedisTemplate,String businessPrefix, Integer step) {
+    public RedisIdProvider(StringRedisTemplate stringRedisTemplate, String businessPrefix, Integer step) {
         this.stringRedisTemplate = stringRedisTemplate;
         this.businessPrefix = businessPrefix;
         this.step = step;
