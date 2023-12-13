@@ -10,7 +10,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/docker/mysql/log:/var/log/mysql
       - /var/docker/mysql/data:/var/lib/mysql
-      - /var/docker/mysql/conf:/etc/mysql
+      - /var/docker/mysql/conf:/etc/mysql/conf.d
     environment:
       - MYSQL_ROOT_PASSWORD=xy19981123..
     restart: always
