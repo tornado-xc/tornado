@@ -23,3 +23,10 @@ spring:
     nacos:
       discovery:
         server-addr: 150.158.130.171:58848
+short-link:
+  domain: http://localhost:56000
+  version: /v1
+
+mybatis-plus:
+  global-config:
+    banner: false
