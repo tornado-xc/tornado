@@ -27,39 +27,4 @@ public class InsertStatementHandler extends AbstractSqlStatementHandler {
         return source;
     }
 
-    @Override
-    public String replaceTableName(String source, Map<String, String> tableNameMappings) {
-
-        SqlStatementHolder statementHolder = SqlStatementHolder.getInstance(source);
-        if (!SqlStatementTypeEnum.INSERT.equals(statementHolder.getStatementType())) {
-            return source;
-        }
-
-        Insert insert = (Insert) statementHolder.getStatement();
-        Table table = insert.getTable();
-        table.setName(tableNameMappings.getOrDefault(table.getName(), table.getName()));
-
-        return insert.toString();
-    }
-
-    @Override
-    public String replaceTableName(String source, Function<String, String> tableNameHandler) {
-        SqlStatementHolder statementHolder = SqlStatementHolder.getInstance(source);
-        if (!SqlStatementTypeEnum.INSERT.equals(statementHolder.getStatementType())) {
-            return source;
-        }
-
-        Insert insert = (Insert) statementHolder.getStatement();
-        Table table = insert.getTable();
-        table.setName(tableNameHandler.apply(table.getName()));
-
-        return insert.toString();
-    }
-
-    @Override
-    public String replaceTableName(String source, String suffix) {
-        return replaceTableName(source, tableName -> tableName + suffix);
-    }
-
-
 }

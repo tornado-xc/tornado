@@ -1,5 +1,6 @@
 package com.xingchi.tornado.mybatisplus.parser;
 
+import com.xingchi.tornado.mybatisplus.constants.SqlConstants;
 import com.xingchi.tornado.mybatisplus.enums.SqlStatementTypeEnum;
 import com.xingchi.tornado.mybatisplus.model.SqlStatementHolder;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,6 @@ import java.util.function.Predicate;
 @SuppressWarnings("Duplicates")
 public class UpdateStatementHandler extends AbstractSqlStatementHandler {
 
-
     @Override
     public String addCondition(String source, String condition) {
 
@@ -49,7 +49,7 @@ public class UpdateStatementHandler extends AbstractSqlStatementHandler {
             if (Objects.isNull(where)) {
                 where = CCJSqlParserUtil.parseCondExpression(condition);
             } else {
-                where = CCJSqlParserUtil.parseCondExpression(where + "AND" + condition);
+                where = CCJSqlParserUtil.parseCondExpression(where + SqlConstants.AND  + condition);
             }
             update.setWhere(where);
             return update.toString();
@@ -58,70 +58,4 @@ public class UpdateStatementHandler extends AbstractSqlStatementHandler {
         }
     }
 
-    @Override
-    public String addCondition(String source, String condition, Predicate<SqlStatementHolder> predicate) {
-        SqlStatementHolder instance = SqlStatementHolder.getInstance(source);
-        if (predicate.test(instance)) {
-            return addCondition(source, condition);
-        }
-
-        return source;
-    }
-
-    @Override
-    public String replaceTableName(String source, Map<String, String> tableNameMappings) {
-
-        SqlStatementHolder instance = SqlStatementHolder.getInstance(source);
-        if (!SqlStatementTypeEnum.UPDATE.equals(instance.getStatementType())) {
-            return source;
-        }
-
-        Update update = (Update) instance.getStatement();
-        List<Join> joins = update.getJoins();
-        if (!CollectionUtils.isEmpty(joins)) {
-            for (Join join : joins) {
-                FromItem rightItem = join.getRightItem();
-                if (rightItem instanceof Table) {
-                    Table table = (Table) rightItem;
-                    table.setName(tableNameMappings.getOrDefault(table.getName(), table.getName()));
-                }
-            }
-        }
-
-        Table table = update.getTable();
-        table.setName(tableNameMappings.getOrDefault(table.getName(), table.getName()));
-
-        return update.toString();
-    }
-
-    @Override
-    public String replaceTableName(String source, Function<String, String> tableNameHandler) {
-
-        SqlStatementHolder instance = SqlStatementHolder.getInstance(source);
-        if (!SqlStatementTypeEnum.UPDATE.equals(instance.getStatementType())) {
-            return source;
-        }
-
-        Update update = (Update) instance.getStatement();
-        List<Join> joins = update.getJoins();
-        if (!CollectionUtils.isEmpty(joins)) {
-            for (Join join : joins) {
-                FromItem rightItem = join.getRightItem();
-                if (rightItem instanceof Table) {
-                    Table table = (Table) rightItem;
-                    table.setName(tableNameHandler.apply(table.getName()));
-                }
-            }
-        }
-
-        Table table = update.getTable();
-        table.setName(tableNameHandler.apply(table.getName()));
-
-        return update.toString();
-    }
-
-    @Override
-    public String replaceTableName(String source, String suffix) {
-        return replaceTableName(source, tableName -> tableName + suffix);
-    }
 }
