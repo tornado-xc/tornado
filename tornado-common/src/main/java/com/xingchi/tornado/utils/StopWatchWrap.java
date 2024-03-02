@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 
 import java.text.NumberFormat;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,6 +39,17 @@ public class StopWatchWrap extends StopWatch {
         this.printUnit = Objects.isNull(unit) ? TimeUnit.MILLISECONDS : unit.getSupportUnit();
     }
 
+    public static StopWatchWrap watch(String summary, WatchTimeUnit unit) {
+        return new StopWatchWrap(summary, unit);
+    }
+
+    public static StopWatchWrap watch(String summary) {
+        return StopWatchWrap.watch(summary, WatchTimeUnit.MILLISECONDS);
+    }
+
+    public static StopWatchWrap watch(WatchTimeUnit unit) {
+        return StopWatchWrap.watch("", Optional.ofNullable(unit).orElse(WatchTimeUnit.MILLISECONDS));
+    }
 
     @Override
     @NonNull

@@ -1,4 +1,4 @@
-version: "3.1"
+version: '3.2'
 services:
   kkfileview: #服务名称，不是容器名，只是在文件中方便观看是按个服务
     image: keking/kkfileview:v4.0.0  #依赖的镜像

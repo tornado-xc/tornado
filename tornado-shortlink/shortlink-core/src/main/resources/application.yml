@@ -1,8 +1,8 @@
 server:
-  port: ${SERVER.PORT:55000}
+  port: ${SERVER.PORT:56000}
 spring:
   application:
-    name: ${SPRING.APPLICATION.NAME:sms-server}
+    name: ${SPRING.APPLICATION.NAME:shortlink-server}
   redis:
     sentinel:
       master: mymaster
@@ -23,3 +23,10 @@ spring:
     nacos:
       discovery:
         server-addr: 150.158.130.171:58848
+short-link:
+  domain: http://localhost:56000
+  version: /v1
+
+mybatis-plus:
+  global-config:
+    banner: false

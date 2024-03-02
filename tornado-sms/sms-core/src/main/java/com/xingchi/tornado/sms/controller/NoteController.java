@@ -3,15 +3,20 @@ package com.xingchi.tornado.sms.controller;
 import com.xingchi.tornado.basic.Result;
 import com.xingchi.tornado.sms.common.model.dto.NoticeDTO;
 import com.xingchi.tornado.sms.service.NoteService;
+import com.xingchi.tornado.unique.client.UniqueCodeClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 /**

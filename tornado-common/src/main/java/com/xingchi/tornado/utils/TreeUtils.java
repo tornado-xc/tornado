@@ -71,6 +71,9 @@ public class TreeUtils {
             if (!allIds.contains(baseNode.getParentId()) || selfIdEqSelfParent.contains(baseNode.getParentId())) {
                 trees.add(baseNode);
             }
+
+            // 叶子节点设置
+            baseNode.setLeaf(CollectionUtils.isEmpty(baseNode.getChildren()));
         }
         return trees;
     }

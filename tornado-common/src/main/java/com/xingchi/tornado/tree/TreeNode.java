@@ -1,9 +1,12 @@
 package com.xingchi.tornado.tree;
 
 import com.google.common.collect.Lists;
+import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * 树形节点接口
@@ -59,5 +62,14 @@ public interface TreeNode<T extends Serializable, M> {
             this.setChildren(Lists.newArrayList());
         }
     }
+
+    void setLeaf(boolean isLeaf);
+
+    /**
+     * 判断当前节点是否是叶子节点
+     *
+     * @return      是否是叶子节点
+     */
+    boolean isLeaf();
 
 }

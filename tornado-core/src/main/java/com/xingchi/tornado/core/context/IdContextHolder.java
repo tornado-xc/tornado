@@ -1,6 +1,5 @@
 package com.xingchi.tornado.core.context;
 
-import com.xingchi.tornado.core.exception.ExceptionWrap;
 import com.xingchi.tornado.unique.client.UniqueCodeClient;
 import org.springframework.util.CollectionUtils;
 

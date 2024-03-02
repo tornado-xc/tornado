@@ -1,29 +1,37 @@
 server:
-  port: ${SERVER.PORT:53000}
+  port: ${SERVER_PORT:55000}
 spring:
   application:
-    name: ${SPRING.APPLICATION.NAME:unique-server}
+    name: ${SPRING_APPLICATION_NAME:tornado-unique-service}
   redis:
     sentinel:
       master: mymaster
-      nodes:
-        - 150.158.130.171:57001
-        - 150.158.130.171:57002
-        - 150.158.130.171:57003
-    password: xy19981123..
-#    host: ${REDIS.HOST:150.158.130.171}
-#    port: ${REDIS.PORT:56379}
-#    password: ${REDIS.PASSWORD:xy19981123..}
+      nodes: ${REDIS_SENTINEL_NODES:150.158.130.171:57001,150.158.130.171:57002,150.158.130.171:57003}
+    password: ${REDIS_PASSWORD:xy19981123..}
+#    host: ${REDIS_HOST:150.158.130.171}
+#    port: ${REDIS_PORT:56379}
+#    password: ${REDIS_PASSWORD:xy19981123..}
   cloud:
     nacos:
       discovery:
-        server-addr: 150.158.130.171:58848
+        server-addr: ${NACOS_DISCOVERY_URL:150.158.130.171:58848}
+#        ip: ${NACOS_DISCOVERY_IP:150.158.130.171}
+#        port: ${NACOS_DISCOVERY_PORT:55000}
 #eureka:
 #  client:
 #    service-url:
-#      defaultZone: http://localhost:58090/eureka
+#      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:58082/eureka}
 #    fetch-registry: true
 #    register-with-eureka: true
 #  instance:
 #    prefer-ip-address: true
-#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+#    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+#    hostname: localhost
+unique:
+  code:
+    snowflake:
+      datacenter-id: ${SNOWFLAKE_DATACENTER_ID:1}
+      work-id: ${SNOWFLAKE_WORK_ID:1}
+    redis-id:
+      step: ${REDIS_STEP:1}
+      business-prefix: ${REDIS_BUSINESS_PREFIX:default}
